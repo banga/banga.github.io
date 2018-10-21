@@ -1,0 +1,49 @@
+.Bio {
+  font-weight: lighter;
+}
+
+.Bio-name {
+  font-size: 64px;
+  line-height: 85px;
+  letter-spacing: -3px;
+  color: #222;
+}
+
+.Bio-location,
+.Bio-title {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.6px;
+  color: #444;
+}
+
+.Links a {
+  text-decoration: none;
+  color: #28f;
+}
+
+.Photo {
+    height: 50px;
+    margin: 15px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.App {
+  padding: 25px;
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+a {
+  text-decoration: none;
+  color: #28f;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
