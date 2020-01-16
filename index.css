@@ -1,40 +1,12 @@
-.Bio {
-  font-weight: lighter;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 16px;
 }
 
-.Bio-name {
-  font-size: 64px;
-  line-height: 85px;
-  letter-spacing: -3px;
-  color: #222;
-}
-
-.Bio-location,
-.Bio-title {
-  font-size: 24px;
-  line-height: 32px;
-  letter-spacing: -0.6px;
-  color: #444;
-}
-
-.Links a {
-  text-decoration: none;
-  color: #28f;
-}
-
-.Photo {
-    height: 50px;
-    margin: 15px;
-    width: 50px;
-    border-radius: 50%;
-}
-
-.App {
-  padding: 25px;
-  width: 75%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 a {
@@ -42,8 +14,66 @@ a {
   color: #28f;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
+.app {
+  padding: 15px 35px;
+  width: 480px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: row;
+  background: #fef9ee;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+  border: 2px solid #ffe7b1;
+}
+
+.photo {
+  height: 50px;
+  margin: 15px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.bio,
+.work,
+.education {
+  font-weight: lighter;
+  margin-bottom: 18px;
+}
+
+.companies {
+  display: flex;
+  flex-direction: row;
+  filter: grayscale(1);
+}
+
+.companies > div {
+  margin-right: 6px;
+  line-height: 32px;
+}
+
+.logo {
+  height: 18px;
+}
+
+.logo.quora {
+  height: 16px;
+}
+
+.bio-name {
+  font-size: 48px;
+  line-height: 85px;
+  letter-spacing: -1px;
+  color: #222;
+}
+
+.work-title,
+.education-title {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.6px;
+  color: #444;
+}
+
+.work,
+.education {
+  line-height: 28px;
 }
