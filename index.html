@@ -13,15 +13,17 @@
       <div class="column-2">
         <div class="bio">
           <div class="bio-name">Shrey Banga</div>
-          <div class="bio-location"><code>Software Engineer</code> in San Francisco, CA</div>
+          <div class="bio-location">
+            <code>Software Engineer</code> in San Francisco, CA
+          </div>
         </div>
         <div class="work">
           <div class="work-title">Work</div>
           <div class="companies">
             <div><img class="logo airtable" src="airtable.svg" /></div>
             <div><img class="logo quip" src="quip.svg" /></div>
-            <div><img class="logo quora" src="quora.svg"/></div>
-            <div><img class="logo google" src="google.svg"/></div>
+            <div><img class="logo quora" src="quora.svg" /></div>
+            <div><img class="logo google" src="google.svg" /></div>
           </div>
         </div>
         <div class="education">
@@ -34,4 +36,43 @@
       </div>
     </div>
   </body>
+  <script type="text/javascript">
+    window.addEventListener("mousemove", e => {
+      const app = document.querySelector(".app");
+
+      const {
+        top,
+        left,
+        bottom,
+        right,
+        width,
+        height
+      } = app.getBoundingClientRect();
+      const cx = (left + right) / 2;
+      const cy = (top + bottom) / 2;
+
+      const { clientX, clientY } = e;
+      const dx = clientX - cx;
+      const dy = clientY - cy;
+
+      // Rotate along direction perpendicular to the mouse
+      const rx = -dy,
+        ry = dx;
+
+      // Rotate so that the point at distance `r` along the normal meets the pixel
+      const h = Math.sqrt(dx * dx + dy * dy);
+      const r = width * 4;
+      const dz = Math.sqrt(r * r - h * h);
+      let angle =
+        (Math.asin((h * h + r * r - dz * dz) / (2 * h * r)) * 180) / Math.PI;
+
+      app.style.transform = `rotate3d(${rx}, ${ry}, 0, ${angle}deg)`;
+
+      const sx = (-dx / r) * 50;
+      const sy = (-dy / r) * 50;
+      const radius = (h / r) * 100;
+
+      app.style.boxShadow = `${sx}px ${sy}px ${radius}px rgba(0,0,0,0.1)`;
+    });
+  </script>
 </html>
