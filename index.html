@@ -36,32 +36,27 @@
       </div>
     </div>
   </body>
-  <script type="text/javascript">
-    window.addEventListener("mousemove", e => {
-      const app = document.querySelector(".app");
+  <script type="module">
+    const app = document.querySelector(".app");
+    const {
+      top,
+      left,
+      bottom,
+      right,
+      width,
+      height
+    } = app.getBoundingClientRect();
+    const cx = (left + right) / 2;
+    const cy = (top + bottom) / 2;
 
-      const {
-        top,
-        left,
-        bottom,
-        right,
-        width,
-        height
-      } = app.getBoundingClientRect();
-      const cx = (left + right) / 2;
-      const cy = (top + bottom) / 2;
-
-      const { clientX, clientY } = e;
-      const dx = clientX - cx;
-      const dy = clientY - cy;
-
+    function update(dx, dy) {
       // Rotate along direction perpendicular to the mouse
       const rx = -dy;
       const ry = dx;
 
       // Rotate so that the point at distance `r` along the normal meets the pixel
-      const h = Math.sqrt(dx * dx + dy * dy);
       const r = width * 4;
+      const h = Math.sqrt(dx * dx + dy * dy);
       const dz = Math.sqrt(r * r - h * h);
       let angle =
         (Math.asin((h * h + r * r - dz * dz) / (2 * h * r)) * 180) / Math.PI;
@@ -72,15 +67,24 @@
       app.style.filter = `brightness(${Math.cos((angle * Math.PI) / 180)})`;
 
       // Move and enlarge the shadow
-      const sx = (-dx / r) * 50;
-      const sy = (-dy / r) * 50;
-      const radius = (h / r) * 100;
+      const sx = (-dx / r) * 150;
+      const sy = (-dy / r) * 150;
+      const radius = (h / r) * 300;
 
       app.style.boxShadow = `${sx}px ${sy}px ${radius}px rgba(0,0,0,0.1)`;
 
       // Rotate the border gradient
       const reflectionAngle = dx < 0 ? -angle * 4 : angle * 4;
       app.style.borderImage = `linear-gradient(${reflectionAngle}deg, #ffdfb8 0%, #ffdafd 33%, #fff7c1 66%, #b8deff 100%) 1`;
+    }
+
+    window.addEventListener("mousemove", e => {
+      const { clientX, clientY } = e;
+      const dx = clientX - cx;
+      const dy = clientY - cy;
+      update(dx, dy);
     });
+
+    update(-width / 2, -height / 2);
   </script>
 </html>
