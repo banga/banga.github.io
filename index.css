@@ -54,6 +54,11 @@ a {
   height: 18px;
 }
 
+.logo.quip, .logo.google {
+  transform: translateY(3px);
+  height: 20px;
+}
+
 .logo.quora {
   height: 16px;
 }
