@@ -88,10 +88,8 @@ a {
 }
 
 .bio-name {
-  font-size: 44px;
-  margin: 10px 0;
-  letter-spacing: -1px;
-  color: #222;
+  font-size: 32px;
+  margin: 20px 0 10px 0;
 }
 
 .work-title,
@@ -99,7 +97,6 @@ a {
   font-size: 24px;
   line-height: 32px;
   letter-spacing: -0.6px;
-  color: #444;
 }
 
 .work,
