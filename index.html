@@ -56,8 +56,8 @@
       const dy = clientY - cy;
 
       // Rotate along direction perpendicular to the mouse
-      const rx = -dy,
-        ry = dx;
+      const rx = -dy;
+      const ry = dx;
 
       // Rotate so that the point at distance `r` along the normal meets the pixel
       const h = Math.sqrt(dx * dx + dy * dy);
@@ -68,11 +68,19 @@
 
       app.style.transform = `rotate3d(${rx}, ${ry}, 0, ${angle}deg)`;
 
+      // Darken the card
+      app.style.filter = `brightness(${Math.cos((angle * Math.PI) / 180)})`;
+
+      // Move and enlarge the shadow
       const sx = (-dx / r) * 50;
       const sy = (-dy / r) * 50;
       const radius = (h / r) * 100;
 
       app.style.boxShadow = `${sx}px ${sy}px ${radius}px rgba(0,0,0,0.1)`;
+
+      // Rotate the border gradient
+      const reflectionAngle = dx < 0 ? -angle * 4 : angle * 4;
+      app.style.borderImage = `linear-gradient(${reflectionAngle}deg, #ffdfb8 0%, #ffdafd 33%, #fff7c1 66%, #b8deff 100%) 1`;
     });
   </script>
 </html>
