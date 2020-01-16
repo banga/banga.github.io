@@ -18,7 +18,11 @@ a {
 .app {
   padding: 15px 15px;
   width: 480px;
-  margin: 50px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -240px;
+  margin-top: -180px;
   display: flex;
   flex-direction: row;
   border: 2px solid #ffe7b1;
