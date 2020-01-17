@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Shrey Banga</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="stylesheet" type="text/css" href="/index.css" />
   </head>
   <body>
@@ -41,16 +41,7 @@
   </body>
   <script type="module">
     const app = document.querySelector(".app");
-    const {
-      top,
-      left,
-      bottom,
-      right,
-      width,
-      height
-    } = app.getBoundingClientRect();
-    const cx = (left + right) / 2;
-    const cy = (top + bottom) / 2;
+    const { width, height } = app.getBoundingClientRect();
 
     function update(dx, dy) {
       // Rotate along direction perpendicular to the mouse
@@ -82,6 +73,9 @@
     }
 
     window.addEventListener("mousemove", e => {
+      const { top, left, bottom, right } = app.getBoundingClientRect();
+      const cx = (left + right) / 2;
+      const cy = (top + bottom) / 2;
       const { clientX, clientY } = e;
       const dx = clientX - cx;
       const dy = clientY - cy;
