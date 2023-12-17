@@ -15,9 +15,19 @@
 
 /* Sizes */
 :root {
-  --font-size: 16px;
-  --spacing-size: 12px;
-  --icon-size: 16px;
+  --font-size: 1.5rem;
+  --spacing-size: 1rem;
+  --icon-size: 1.5rem;
+  --photo-size: 8rem;
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --font-size: 2rem;
+    --spacing-size: 2rem;
+    --icon-size: 2rem;
+    --photo-size: 12rem;
+  }
 }
 
 /* Type */
@@ -86,6 +96,12 @@
 
 .circle {
   border-radius: 50%;
+  border: 2px solid var(--text-color);
+}
+
+.photo {
+  width: var(--photo-size);
+  height: var(--photo-size);
 }
 
 body {
@@ -104,4 +120,5 @@ a {
 svg {
   fill: var(--icon-fill-color);
   height: var(--icon-size);
+  width: var(--icon-size);
 }
