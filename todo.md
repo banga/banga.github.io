@@ -1,7 +1,7 @@
 [x] Generate and deploy in a GitHub action
 [ ] Generate a main feed page
 [ ] Anchor links to subheadings
-[ ] Parse and render math
+[x] Parse and render math
 [ ] Render full html pages
 [ ] CSS styling
 [ ] RSS support

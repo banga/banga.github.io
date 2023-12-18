@@ -11,13 +11,17 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "@types/node": "^20.10.5",
     "@types/react-dom": "^18.2.18",
-    "nodemon": "^3.0.2",
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
+    "rehype-mathjax": "^5.0.0",
+    "remark-math": "^6.0.0",
     "typescript": "^5.3.3"
   }
 }
