@@ -6,4 +6,4 @@
 [x] CSS styling
 [ ] RSS support
 [ ] Maybe generate SEO tags that Jekyll inserted
-[ ] Syntax highlight code blocks
+[x] Syntax highlight code blocks

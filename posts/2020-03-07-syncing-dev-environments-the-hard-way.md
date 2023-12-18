@@ -32,7 +32,7 @@ The `OhMyZsh` and `OhMyZshCustomPlugins` checks ensure that [Oh My Zsh](https://
 
 This copies a custom CSS file I wrote to make `git instaweb` output look similar to Github. Along with this file, I have a shell command that allows me to preview my latest commit before pushing:
 
-```sh
+```bash
 function gcpr() {
     pkill -9 lighttpd
     git instaweb start -l
