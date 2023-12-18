@@ -2,7 +2,8 @@
 [ ] Generate a main feed page
 [ ] Anchor links to subheadings
 [x] Parse and render math
-[ ] Render full html pages
-[ ] CSS styling
+[x] Render full html pages
+[x] CSS styling
 [ ] RSS support
 [ ] Maybe generate SEO tags that Jekyll inserted
+[ ] Syntax highlight code blocks
