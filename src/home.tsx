@@ -14,7 +14,7 @@ function Home() {
         </div>
         <div className="m1">
           I have worked as a Software Engineer at{" "}
-          <a href="https://www.airtable.com">Airtable</a>,
+          <a href="https://www.airtable.com">Airtable</a>,{" "}
           <a href="https://www.quip.com">Quip</a>,{" "}
           <a href="https://www.quora.com">Quora</a>,{" "}
           <a href="https://www.google.com">Google</a> and{" "}
