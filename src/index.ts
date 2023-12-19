@@ -1,14 +1,14 @@
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { readPostAsync } from "./post.js";
+import { renderPage } from "./page.js";
 
 async function writePosts(postsPath: string, outputDir: string) {
   console.log({ postsPath, outputDir });
 
   for (const filePath of fs.readdirSync(postsPath)) {
-    const { outputPath: postOutputPath, content } = await readPostAsync(
+    const { outputPath: postOutputPath, title, content } = await readPostAsync(
       path.join(postsPath, filePath)
     );
     const outputPath = path.join(outputDir, postOutputPath);
@@ -18,8 +18,8 @@ async function writePosts(postsPath: string, outputDir: string) {
       fs.mkdirSync(postDir, { recursive: true });
     }
 
-    console.log(`Writing ${outputPath}`);
-    fs.writeFileSync(outputPath, renderToStaticMarkup(content));
+    console.log(`Writing "${title}" to ${outputPath}`);
+    fs.writeFileSync(outputPath, renderPage(title, content));
   }
 }
 

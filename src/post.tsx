@@ -8,13 +8,14 @@ import rehypeMathjax from "rehype-mathjax";
 import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
 
 export type PostData = {
+  title: string;
   content: ReactElement;
   outputPath: string;
 };
 
 function Header() {
   return (
-    <div className="mt1 flex-row align-center">
+    <div className="flex-row align-center">
       <a href="/">shreyb.dev</a>&nbsp;/&nbsp;<a href="/blog">blog</a>
     </div>
   );
@@ -23,10 +24,9 @@ function Header() {
 function Footer() {
   return (
     <div className="mt1 flex-row align-center">
-      <img className="mr1 circle photo" src="/me.jpg" alt="me" />
       <div className="flex-col">
-        <div className="font-large bold">Shrey Banga</div>
-        <div className="light">banga.shrey@gmail.com</div>
+        <div className="bold">Shrey Banga</div>
+        <div className="font-small light">banga.shrey@gmail.com</div>
       </div>
     </div>
   );
@@ -34,28 +34,21 @@ function Footer() {
 
 export function Post({ children }: { children: ReactNode }) {
   return (
-    <html>
-      <head>
-        <meta charSet="utf-8" />
-        <link rel="stylesheet" type="text/css" href="/blog.css" />
-      </head>
-      <body>
-        <div className="flex-col m1">
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <div className="flex-col m1">
+      <Header />
+      {children}
+      <Footer />
+    </div>
   );
 }
 
 export async function readPostAsync(filePath: string): Promise<PostData> {
-  const content = fs.readFileSync(filePath, "utf-8");
   const [createdYear, createdMonth, createdDate, ...rest] = path
     .parse(filePath)
     .name.split("-");
-  const fileName = rest.join("-") + ".html";
+  const outputFileName = rest.join("-") + ".html";
+
+  const markdownContent = fs.readFileSync(filePath, "utf-8");
 
   const codeStyle = (
     await import(
@@ -65,7 +58,12 @@ export async function readPostAsync(filePath: string): Promise<PostData> {
     )
   ).default.default;
 
+  // Extract out the title using regex for now
+  const titleMatch = markdownContent.match(/^\s*#\s+(?<title>.+)/);
+  const title = titleMatch?.groups?.title ?? "";
+
   return {
+    title,
     content: (
       <Post>
         <Markdown
@@ -84,6 +82,19 @@ export async function readPostAsync(filePath: string): Promise<PostData> {
                   children={String(children).replace(/\n$/, "")}
                   language={language}
                   style={codeStyle}
+                  // The node we get here is already wrapped in a `pre` tag, so
+                  // we replace it with a `div` here to avoid having nested
+                  // `pre` tags
+                  PreTag={'div'}
+                  // Reset a bunch of styles that Prism injects here so we can
+                  // style it from CSS
+                  customStyle={{
+                    padding: 0,
+                    margin: 0,
+                    fontFamily: undefined,
+                    fontSize: undefined,
+                    background: undefined
+                  }}
                   {...rest}
                 />
               ) : (
@@ -94,10 +105,10 @@ export async function readPostAsync(filePath: string): Promise<PostData> {
             },
           }}
         >
-          {content}
+          {markdownContent}
         </Markdown>
       </Post>
     ),
-    outputPath: `${createdYear}/${createdMonth}/${createdDate}/${fileName}`,
+    outputPath: `${createdYear}/${createdMonth}/${createdDate}/${outputFileName}`,
   };
 }

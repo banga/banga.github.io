@@ -7,7 +7,7 @@
   "scripts": {
     "compile": "tsc",
     "build": "node build/index.js",
-    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts,tsx,json,md -x \"npm run compile && npm run build || exit 1\" "
+    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts,tsx,json,md,css -x \"npm run compile && npm run build || exit 1\" "
   },
   "author": "",
   "license": "ISC",
