@@ -9,8 +9,8 @@ import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
 
 export type PostData = {
   title: string;
-  content: ReactElement;
-  outputPath: string;
+  content: string;
+  relativePath: string;
 };
 
 function Header() {
@@ -42,14 +42,26 @@ export function Post({ children }: { children: ReactNode }) {
   );
 }
 
-export async function readPostAsync(filePath: string): Promise<PostData> {
+export function readPost(filePath: string): PostData {
   const [createdYear, createdMonth, createdDate, ...rest] = path
     .parse(filePath)
     .name.split("-");
   const outputFileName = rest.join("-") + ".html";
 
-  const markdownContent = fs.readFileSync(filePath, "utf-8");
+  const content = fs.readFileSync(filePath, "utf-8");
 
+  // Extract out the title using regex for now
+  const titleMatch = content.match(/^\s*#\s+(?<title>.+)/);
+  const title = titleMatch?.groups?.title ?? "";
+
+  return {
+    title,
+    content,
+    relativePath: `${createdYear}/${createdMonth}/${createdDate}/${outputFileName}`,
+  };
+}
+
+export async function renderPostAsync(post: PostData): Promise<ReactElement> {
   const codeStyle = (
     await import(
       // @ts-expect-error: this abomination is needed to load the theme
@@ -58,57 +70,48 @@ export async function readPostAsync(filePath: string): Promise<PostData> {
     )
   ).default.default;
 
-  // Extract out the title using regex for now
-  const titleMatch = markdownContent.match(/^\s*#\s+(?<title>.+)/);
-  const title = titleMatch?.groups?.title ?? "";
-
-  return {
-    title,
-    content: (
-      <Post>
-        <Markdown
-          remarkPlugins={[remarkMath]}
-          rehypePlugins={[rehypeMathjax]}
-          components={{
-            // Syntax highlight code blocks if possible
-            code(props) {
-              const { children, className, node, ref, ...rest } = props;
-              const [_, language] =
-                /language-(\w+)/.exec(className || "") ?? [];
-              return ReactSyntaxHighlighter.supportedLanguages.includes(
-                language
-              ) ? (
-                <ReactSyntaxHighlighter
-                  children={String(children).replace(/\n$/, "")}
-                  language={language}
-                  style={codeStyle}
-                  // The node we get here is already wrapped in a `pre` tag, so
-                  // we replace it with a `div` here to avoid having nested
-                  // `pre` tags
-                  PreTag={'div'}
-                  // Reset a bunch of styles that Prism injects here so we can
-                  // style it from CSS
-                  customStyle={{
-                    padding: 0,
-                    margin: 0,
-                    fontFamily: undefined,
-                    fontSize: undefined,
-                    background: undefined
-                  }}
-                  {...rest}
-                />
-              ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-        >
-          {markdownContent}
-        </Markdown>
-      </Post>
-    ),
-    outputPath: `${createdYear}/${createdMonth}/${createdDate}/${outputFileName}`,
-  };
+  return (
+    <Post>
+      <Markdown
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeMathjax]}
+        components={{
+          // Syntax highlight code blocks if possible
+          code(props) {
+            const { children, className, node, ref, ...rest } = props;
+            const [_, language] = /language-(\w+)/.exec(className || "") ?? [];
+            return ReactSyntaxHighlighter.supportedLanguages.includes(
+              language
+            ) ? (
+              <ReactSyntaxHighlighter
+                children={String(children).replace(/\n$/, "")}
+                language={language}
+                style={codeStyle}
+                // The node we get here is already wrapped in a `pre` tag, so
+                // we replace it with a `div` here to avoid having nested
+                // `pre` tags
+                PreTag={"div"}
+                // Reset a bunch of styles that Prism injects here so we can
+                // style it from CSS
+                customStyle={{
+                  padding: 0,
+                  margin: 0,
+                  fontFamily: undefined,
+                  fontSize: undefined,
+                  background: undefined,
+                }}
+                {...rest}
+              />
+            ) : (
+              <code {...rest} className={className}>
+                {children}
+              </code>
+            );
+          },
+        }}
+      >
+        {post.content}
+      </Markdown>
+    </Post>
+  );
 }
