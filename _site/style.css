@@ -1,11 +1,11 @@
 /* Colors */
 :root {
   --background-color: #15181a;
-  --text-color: #f0f0f0;
-  color-scheme: light;
+  --text-color: #e0e0e0;
+  --external-link-color: #fff;
+  color-scheme: dark;
 
   --link-color: #55abd9;
-  --link-underline-color: #55abd960;
   --border-color: #878b995a;
   --icon-fill-color: #8c91a5;
   --code-block-color: #262a2e;
@@ -15,7 +15,8 @@
   :root {
     --background-color: #fff;
     --text-color: #333;
-    color-scheme: dark;
+    --external-link-color: #111;
+    color-scheme: light;
   }
 }
 
@@ -112,6 +113,9 @@
 .align-center {
   align-items: center;
 }
+.align-baseline {
+  align-items: baseline;
+}
 
 /* Borders */
 .b1 {
@@ -128,6 +132,14 @@
 }
 .bb1 {
   border-bottom: 1px solid var(--border-color);
+}
+
+/* Positioning */
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
 }
 
 .circle {
@@ -149,8 +161,12 @@ body {
 }
 
 a {
-  text-decoration-color: var(--link-underline-color);
+  text-decoration: none;
   color: var(--link-color);
+}
+a[href^="http"] {
+  text-decoration: underline;
+  color: var(--external-link-color);
 }
 
 h1 {
@@ -192,4 +208,16 @@ svg.icon {
   fill: var(--icon-fill-color);
   height: var(--icon-size);
   width: var(--icon-size);
+}
+
+/* Permalink that shows up when hovering over the parent heading */
+
+.permalink {
+  opacity: 0;
+  transition: ease-in opacity 0.2s;
+}
+
+h2:hover > .permalink,
+h3:hover > .permalink {
+  opacity: 1;
 }

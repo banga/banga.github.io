@@ -41,15 +41,13 @@ export async function renderPostPreviewAsync(
   const preview = await renderPostContentAsync(getPostPreview(post));
 
   return (
-    <>
-      <div className="mt1">
-        <div className="bold">
-          <a href={post.relativePath}>{post.title}</a>
-        </div>
-        <code className="font-small">{renderDate(post.createdDate)}</code>
-        <blockquote className="m1 pl1 bl1">{preview}</blockquote>
+    <div key={post.relativePath} className="mt1">
+      <div className="bold">
+        <a href={post.relativePath}>{post.title}</a>
       </div>
-    </>
+      <code className="font-small">{renderDate(post.createdDate)}</code>
+      <blockquote className="m1 pl1 bl1">{preview}</blockquote>
+    </div>
   );
 }
 

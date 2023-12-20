@@ -50,4 +50,4 @@ The `VSCodeSyncing` and `VSCodeExtensions` checks ensure that my vscode settings
 
 ## Dropbox
 
-I still end up using Dropbox for syncing some settings which I change often enough for it to be too annoying to have to check-in into a repo and push. These include [iTerm2 settings]({{ site.baseurl }}{% post_url 2020-03-01-little-known-features-of-iterm2 %}), Karabiner configurations, Alfred settings etc.
+I still end up using Dropbox for syncing some settings which I change often enough for it to be too annoying to have to check-in into a repo and push. These include [iTerm2 settings](/blog/2020/03/02/little-known-features-of-iterm2.html), Karabiner configurations, Alfred settings etc.

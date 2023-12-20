@@ -2,7 +2,7 @@
 
 [iTerm2](https://iterm2.com/) has a lot of little-known features that can make development much easier.
 
-## Smart Selection  {#smart-selection}
+## Smart Selection
 
 If you work in a large codebase, chances are you often need to open commits on Github, or revisions in Phabricator or tickets in your in-house bug tracker. This usually involves copying and pasting an identifier into a URL and opening that in your browser. For example, you may want to open commit hashes or PRs on Github with a single click. You can make iTerm2 recognize arbitrary ids and take custom actions using them when they are Command-clicked via [Smart Selections](https://www.iterm2.com/documentation-smart-selection.html).
 
@@ -31,7 +31,7 @@ Once this is done, `Command-click` on a commit hash in iTerm2 should open it in 
 4. Set the `Action` to `Open URL...`
 5. Set the `Parameter` to `https://secure.phabricator.com/\0` or a similar URL for your organization.
 
-## Dynamic Profiles  {#dynamic-profiles}
+## Dynamic Profiles
 
 If you work on a project that requires starting a number of terminal sessions in specific conditions, it can get annoying to get your environment running from scratch. iTerm2's [Dynamic Profiles](https://www.iterm2.com/documentation-dynamic-profiles.html) allow you to create custom profiles that can depend on other profiles. You can use this to create a hierarchy of profiles that share your common settings but run different commands on startup.
 
@@ -39,6 +39,7 @@ For example, say your project always needs you to be running `npm run build`, `n
 
 1. Generate four GUIDs by running `uuidgen` in your terminal four times and copying the results.
 2. Create a file in `~/Library/Application Support/iTerm2/DynamicProfiles` with these contents (fill in the parts in `<...>`):
+
 ```json
 {
   "Profiles": [
@@ -70,6 +71,7 @@ For example, say your project always needs you to be running `npm run build`, `n
   ]
 }
 ```
+
 3. Reload iTerm2
 
 These profiles should now show up in iTerm2 as dynamic profiles. You can then start sessions with these profiles to create a window arrangement and hit `Command-Shift-S` to save it. Then you can start all of these sessions at any time by just pressing `Command-Shift-R` or tell iTerm2 to open the arrangement when it starts! Check out <https://blog.andrewray.me/how-to-create-custom-iterm2-window-arrangments/> for a detailed guide on window arrangements.

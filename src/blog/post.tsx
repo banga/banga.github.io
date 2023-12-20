@@ -8,6 +8,7 @@ import rehypeMathjax from "rehype-mathjax";
 import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
+import { AutolinkedHeading } from "./autolinkedheading.js";
 
 export type PostData = {
   title: string;
@@ -62,6 +63,8 @@ export async function renderPostContentAsync(
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeMathjax]}
       components={{
+        h2: AutolinkedHeading,
+        h3: AutolinkedHeading,
         // Syntax highlight code blocks if possible
         code(props) {
           const { children, className, node, ref, ...rest } = props;
