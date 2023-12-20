@@ -42,10 +42,12 @@ export async function renderPostPreviewAsync(
 
   return (
     <div key={post.relativePath} className="mt1">
-      <div className="bold">
-        <a href={post.relativePath}>{post.title}</a>
+      <div className="flex-row space-between align-baseline">
+        <div className="bold" style={{ flexBasis: "80%" }}>
+          <a href={post.relativePath}>{post.title}</a>
+        </div>
+        <div className="font-small">{renderDate(post.createdDate)}</div>
       </div>
-      <code className="font-small">{renderDate(post.createdDate)}</code>
       <blockquote className="m1 pl1 bl1">{preview}</blockquote>
     </div>
   );

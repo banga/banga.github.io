@@ -116,6 +116,9 @@
 .align-baseline {
   align-items: baseline;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 
 /* Borders */
 .b1 {

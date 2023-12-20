@@ -24,7 +24,7 @@ export function AutolinkedHeading(
         id={anchorId}
         href={`#${anchorId}`}
         title="Permalink to this location"
-        style={{ left: "-1em" }}
+        style={{ left: "-1.2rem" }}
       >
         #
       </a>,
