@@ -98,7 +98,7 @@ async function main() {
     baseUrl = "https://shreyb.dev",
     postsDir = "./posts",
     outputDir = "./_site/",
-    blogPath = "/blog",
+    blogPath = "/blog/",
   ] = process.argv.slice(2);
   console.log({ baseUrl, postsDir, outputDir, blogPath });
 
