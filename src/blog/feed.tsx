@@ -46,14 +46,14 @@ export async function renderPostPreviewAsync(
         <div className="bold">
           <a href={post.relativePath}>{post.title}</a>
         </div>
-        <div className="light">{renderDate(post.createdDate)}</div>
+        <code className="font-small">{renderDate(post.createdDate)}</code>
         <blockquote className="m1 pl1 bl1">{preview}</blockquote>
       </div>
     </>
   );
 }
 
-function Blog({ children }: { children: ReactNode }) {
+function Feed({ children }: { children: ReactNode }) {
   return (
     <div className="flex-col m1">
       <Header />
@@ -63,7 +63,7 @@ function Blog({ children }: { children: ReactNode }) {
   );
 }
 
-export async function renderBlogAsync(posts: PostData[]) {
+export async function renderBlogFeedAsync(posts: PostData[]) {
   const postPreviews = await Promise.all(posts.map(renderPostPreviewAsync));
-  return renderPage("Shrey Banga's blog", <Blog>{postPreviews}</Blog>);
+  return renderPage("Shrey Banga's blog", <Feed>{postPreviews}</Feed>);
 }

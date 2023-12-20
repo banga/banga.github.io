@@ -4,7 +4,7 @@ import * as path from "node:path";
 import { PostData, readPost, renderPostAsync } from "./blog/post.js";
 import { renderPage } from "./page.js";
 import { renderHomePage } from "./home.js";
-import { renderBlogAsync } from "./blog/blog.js";
+import { renderBlogFeedAsync } from "./blog/feed.js";
 
 function readPosts(postsPath: string): PostData[] {
   const postPaths = fs.readdirSync(postsPath);
@@ -29,7 +29,7 @@ async function writePostsAsync(posts: PostData[], blogDir: string) {
 async function writeBlogAsync(blogDir: string, posts: PostData[]) {
   const outputPath = path.join(blogDir, "index.html");
   console.log(`Writing blog to ${outputPath}`);
-  fs.writeFileSync(outputPath, await renderBlogAsync(posts));
+  fs.writeFileSync(outputPath, await renderBlogFeedAsync(posts));
 }
 
 function writeHomepage(outputDir: string) {
