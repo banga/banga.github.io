@@ -1,4 +1,5 @@
 .DS_Store
 /build
 /node_modules
-/_site/**/*.html
+/_site/index.html
+/_site/blog/

@@ -44,12 +44,12 @@ function Home() {
   );
 }
 
-export function HomePage() {
+export function HomePage({ baseUrl }: { baseUrl: string }) {
   return (
     <Page
       title="Shrey Banga"
       description="Shrey Banga's home page and blog"
-      relativeUrl="/"
+      canonicalUrl={baseUrl}
       type="website"
     >
       <Home />

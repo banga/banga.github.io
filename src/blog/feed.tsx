@@ -23,10 +23,16 @@ export async function renderPostPreviewAsync(
   );
 }
 
-function Feed({ children }: { children: ReactNode }) {
+function Feed({
+  hostname,
+  children,
+}: {
+  hostname: string;
+  children: ReactNode;
+}) {
   return (
     <div className="flex-col m1">
-      <Header />
+      <Header hostname={hostname} />
       {children}
       <Footer />
     </div>
@@ -34,17 +40,19 @@ function Feed({ children }: { children: ReactNode }) {
 }
 
 export async function renderBlogFeedAsync(
-  posts: PostData[]
+  posts: PostData[],
+  hostname: string,
+  blogUrl: string
 ): Promise<ReactElement> {
   const postPreviews = await Promise.all(posts.map(renderPostPreviewAsync));
   return (
     <Page
       title="Shrey Banga's blog"
       description="Shrey Banga's blog"
-      relativeUrl="/blog"
+      canonicalUrl={blogUrl}
       type="website"
     >
-      <Feed>{postPreviews}</Feed>
+      <Feed hostname={hostname}>{postPreviews}</Feed>
     </Page>
   );
 }

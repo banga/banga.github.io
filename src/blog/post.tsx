@@ -10,12 +10,15 @@ import { Header } from "./header.js";
 import { Footer } from "./footer.js";
 import { AutolinkedHeading } from "./autolinkedheading.js";
 import { Page } from "../page.js";
+import { fontFamily } from "../og-image.js";
+import { renderDate } from "./date.js";
 
 export type PostData = {
   title: string;
   description: string;
   content: string;
   relativePath: string;
+  relativeOgImagePath: string;
   createdDate: Date;
 };
 
@@ -53,6 +56,13 @@ export function readPost(filePath: string): PostData {
     .parse(filePath)
     .name.split("-");
   const outputFileName = rest.join("-") + ".html";
+  const relativePath = path.join(
+    createdYear,
+    createdMonth,
+    createdDay,
+    outputFileName
+  );
+  const relativeOgImagePath = relativePath.replace(".html", ".png");
 
   const content = fs.readFileSync(filePath, "utf-8");
 
@@ -65,7 +75,8 @@ export function readPost(filePath: string): PostData {
     title,
     description,
     content,
-    relativePath: `${createdYear}/${createdMonth}/${createdDay}/${outputFileName}`,
+    relativePath,
+    relativeOgImagePath,
     createdDate: new Date(`${createdYear}-${createdMonth}-${createdDay}`),
   };
 }
@@ -127,25 +138,86 @@ export async function renderPostContentAsync(
   );
 }
 
-function Post({ children }: { children: ReactNode }) {
+function Post({
+  hostname,
+  children,
+}: {
+  hostname: string;
+  children: ReactNode;
+}) {
   return (
     <div className="flex-col m1">
-      <Header />
+      <Header hostname={hostname} />
       {children}
       <Footer />
     </div>
   );
 }
 
-export async function renderPostAsync(post: PostData): Promise<ReactElement> {
+export async function renderPostAsync({
+  post,
+  hostname,
+  blogUrl,
+}: {
+  post: PostData;
+  hostname: string;
+  blogUrl: string;
+}): Promise<ReactElement> {
   return (
     <Page
       title={post.title}
       description={post.description}
-      relativeUrl={post.relativePath}
+      canonicalUrl={new URL(post.relativePath, blogUrl).toString()}
+      ogImageUrl={new URL(post.relativeOgImagePath, blogUrl).toString()}
       type="article"
     >
-      <Post>{await renderPostContentAsync(post.content)}</Post>
+      <Post hostname={hostname}>
+        {await renderPostContentAsync(post.content)}
+      </Post>
     </Page>
+  );
+}
+
+export function PostOGImage({
+  post,
+  hostname,
+}: {
+  post: PostData;
+  hostname: string;
+}): ReactElement {
+  // TODO: Switch to CSS-in-JS so we can share styles here
+  return (
+    <div
+      style={{
+        fontFamily: fontFamily(400),
+        fontSize: 24,
+        display: "flex",
+        width: "100%",
+        height: "100%",
+        flexDirection: "column",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#15181a",
+        color: "#e0e0e0",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "20px",
+          lineHeight: 1.5,
+        }}
+      >
+        <div style={{ fontFamily: fontFamily(600), fontSize: 32 }}>
+          {post.title}
+        </div>
+        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+          <div style={{ color: "#55abd9" }}>{hostname}</div>•
+          <div>{renderDate(post.createdDate)}</div>
+        </div>
+      </div>
+    </div>
   );
 }

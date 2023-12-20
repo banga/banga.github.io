@@ -1,22 +1,22 @@
 import React from "react";
 import { ReactElement } from "react";
-import { BASE_URL } from "./consts.js";
 
 export function Page({
   title,
   description,
-  relativeUrl,
+  canonicalUrl,
   type,
+  ogImageUrl,
   children,
 }: {
   title: string;
   description: string;
-  relativeUrl: string;
+  canonicalUrl: string;
   type: "website" | "article";
+  ogImageUrl?: string;
   children: ReactElement;
 }): ReactElement {
   const cacheBuster = Date.now().toString();
-  const canonicalUrl = new URL(relativeUrl, BASE_URL).toString();
   return (
     <html lang="en">
       <head>
@@ -30,10 +30,7 @@ export function Page({
         />
         <meta property="og:title" content={title} />
         <meta property="og:type" content={type} />
-        {/* 
-        TODO: generate image previews of pages
-        <meta property="og:image" content={}> 
-        */}
+        {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
         <meta property="og:url" content={canonicalUrl} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:description" content={description} />

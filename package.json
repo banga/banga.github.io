@@ -7,7 +7,8 @@
   "scripts": {
     "compile": "tsc",
     "build": "node build/index.js",
-    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts,tsx,json,md,css -x \"npm run compile && npm run build || exit 1\" "
+    "build:dev": "node build/index.js http://localhost:8080",
+    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts,tsx,json,md,css -x \"npm run compile && npm run build:dev || exit 1\" "
   },
   "author": "",
   "license": "ISC",
@@ -18,12 +19,15 @@
     "nodemon": "^3.0.2"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.0.16",
+    "@resvg/resvg-js": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-mathjax": "^5.0.0",
     "remark-math": "^6.0.0",
+    "satori": "^0.10.11",
     "typescript": "^5.3.3"
   }
 }

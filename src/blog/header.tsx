@@ -1,9 +1,9 @@
 import React from "react";
 
-export function Header() {
+export function Header({ hostname }: { hostname: string }) {
   return (
     <div>
-      <a href="/">shreyb.dev</a> / <a href="/blog">blog</a>
+      <a href="/">{hostname}</a> / <a href="/blog">blog</a>
     </div>
   );
 }

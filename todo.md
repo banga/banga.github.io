@@ -1,7 +1,8 @@
 [ ] Handle footnotes
 [ ] RSS support
 [ ] Convenince to insert relative links to other posts reliably
-[ ] Generate page previews for social media
+[ ] Add og images for home and blog feed pages
+[x] Generate page previews for social media
 [x] Generate SEO tags
 [x] Anchor links to subheadings
 [x] Generate and deploy in a GitHub action
