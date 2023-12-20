@@ -1,10 +1,14 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { PostData, readPost, renderPostAsync } from "./blog/post.js";
-import { renderPage } from "./page.js";
-import { renderHomePage } from "./home.js";
+import { HomePage } from "./home.js";
 import { renderBlogFeedAsync } from "./blog/feed.js";
+import { renderToStaticMarkup } from "react-dom/server";
+
+function renderElementToFile(element: ReactElement, outputPath: string) {
+  fs.writeFileSync(outputPath, renderToStaticMarkup(element));
+}
 
 function readPosts(postsPath: string): PostData[] {
   const postPaths = fs.readdirSync(postsPath);
@@ -22,20 +26,20 @@ async function writePostsAsync(posts: PostData[], blogDir: string) {
     }
 
     console.log(`Writing post "${post.title}" to ${outputPath}`);
-    fs.writeFileSync(outputPath, renderPage(post.title, postElement));
+    renderElementToFile(postElement, outputPath);
   }
 }
 
 async function writeBlogAsync(blogDir: string, posts: PostData[]) {
   const outputPath = path.join(blogDir, "index.html");
   console.log(`Writing blog to ${outputPath}`);
-  fs.writeFileSync(outputPath, await renderBlogFeedAsync(posts));
+  renderElementToFile(await renderBlogFeedAsync(posts), outputPath);
 }
 
 function writeHomepage(outputDir: string) {
   const outputPath = path.join(outputDir, "index.html");
   console.log(`Writing homepage to ${outputPath}`);
-  fs.writeFileSync(outputPath, renderHomePage());
+  renderElementToFile(<HomePage />, outputPath);
 }
 
 async function main() {

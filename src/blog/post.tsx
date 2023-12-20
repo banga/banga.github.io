@@ -9,22 +9,43 @@ import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
 import { AutolinkedHeading } from "./autolinkedheading.js";
+import { Page } from "../page.js";
 
 export type PostData = {
   title: string;
+  description: string;
   content: string;
   relativePath: string;
   createdDate: Date;
 };
 
-export function Post({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex-col m1">
-      <Header />
-      {children}
-      <Footer />
-    </div>
-  );
+/**
+ * @param post
+ * @returns roughly the first paragraph of the post after the title
+ */
+function getPostDescription(content: string): string {
+  const lines = [];
+  for (const line of content
+    .split("\n")
+    // Skip the title
+    .slice(1)) {
+    const trimmedLine = line.trim();
+    if (trimmedLine.startsWith("#")) {
+      // Stop at the first heading
+      break;
+    }
+    // Stop at the next para
+    if (trimmedLine.length == 0) {
+      if (lines.length > 0) {
+        break;
+      } else {
+        // Ignore any leading newlines before the first paragraph
+        continue;
+      }
+    }
+    lines.push(line);
+  }
+  return lines.join("\n");
 }
 
 export function readPost(filePath: string): PostData {
@@ -38,9 +59,11 @@ export function readPost(filePath: string): PostData {
   // Extract out the title using regex for now
   const titleMatch = content.match(/^\s*#\s+(?<title>.+)/);
   const title = titleMatch?.groups?.title ?? "";
+  const description = getPostDescription(content);
 
   return {
     title,
+    description,
     content,
     relativePath: `${createdYear}/${createdMonth}/${createdDay}/${outputFileName}`,
     createdDate: new Date(`${createdYear}-${createdMonth}-${createdDay}`),
@@ -104,6 +127,24 @@ export async function renderPostContentAsync(
   );
 }
 
+function Post({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex-col m1">
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
 export async function renderPostAsync(post: PostData): Promise<ReactElement> {
-  return <Post>{await renderPostContentAsync(post.content)}</Post>;
+  return (
+    <Page
+      title={post.title}
+      description={post.description}
+      relativeUrl={post.relativePath}
+    >
+      <Post>{await renderPostContentAsync(post.content)}</Post>
+    </Page>
+  );
 }

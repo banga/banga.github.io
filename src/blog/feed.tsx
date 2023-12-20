@@ -1,44 +1,14 @@
 import React, { ReactElement, ReactNode } from "react";
-import { renderPage } from "../page.js";
+import { Page } from "../page.js";
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
 import { PostData, renderPostContentAsync } from "./post.js";
 import { renderDate } from "./date.js";
 
-/**
- * @param post
- * @returns roughly the first paragraph of the post after the title
- */
-function getPostPreview(post: PostData): string {
-  const content = post.content
-    .split("\n")
-    // Skip the title
-    .slice(1);
-  const lines = [];
-  for (const line of content) {
-    const trimmedLine = line.trim();
-    if (trimmedLine.startsWith("#")) {
-      // Stop at the first heading
-      break;
-    }
-    // Stop at the next para
-    if (trimmedLine.length == 0) {
-      if (lines.length > 0) {
-        break;
-      } else {
-        // Ignore any leading newlines before the first paragraph
-        continue;
-      }
-    }
-    lines.push(line);
-  }
-  return lines.join("\n");
-}
-
 export async function renderPostPreviewAsync(
   post: PostData
 ): Promise<ReactElement> {
-  const preview = await renderPostContentAsync(getPostPreview(post));
+  const preview = await renderPostContentAsync(post.description);
 
   return (
     <div key={post.relativePath} className="mt1">
@@ -63,7 +33,17 @@ function Feed({ children }: { children: ReactNode }) {
   );
 }
 
-export async function renderBlogFeedAsync(posts: PostData[]) {
+export async function renderBlogFeedAsync(
+  posts: PostData[]
+): Promise<ReactElement> {
   const postPreviews = await Promise.all(posts.map(renderPostPreviewAsync));
-  return renderPage("Shrey Banga's blog", <Feed>{postPreviews}</Feed>);
+  return (
+    <Page
+      title="Shrey Banga's blog"
+      description="Shrey Banga's blog"
+      relativeUrl="/blog"
+    >
+      <Feed>{postPreviews}</Feed>
+    </Page>
+  );
 }

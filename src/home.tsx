@@ -1,5 +1,5 @@
 import React from "react";
-import { renderPage } from "./page.js";
+import { Page } from "./page.js";
 import { LinkedIn } from "./icons/linkedin.js";
 import { Twitter } from "./icons/twitter.js";
 import { Mastodon } from "./icons/mastodon.js";
@@ -44,6 +44,14 @@ function Home() {
   );
 }
 
-export function renderHomePage() {
-  return renderPage("Shrey Banga", <Home />);
+export function HomePage() {
+  return (
+    <Page
+      title="Shrey Banga"
+      description="Shrey Banga's home page and blog"
+      relativeUrl="/"
+    >
+      <Home />
+    </Page>
+  );
 }
