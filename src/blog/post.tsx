@@ -206,7 +206,7 @@ export function PostOGImage({
         style={{
           display: "flex",
           flexDirection: "column",
-          margin: "20px",
+          margin: "60px",
           lineHeight: 1.5,
         }}
       >
