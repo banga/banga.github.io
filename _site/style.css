@@ -37,7 +37,7 @@
   font-size: calc(var(--font-size) * 1.5);
 }
 .font-small {
-  font-size: calc(var(--font-size) * 0.75);
+  font-size: calc(var(--font-size) * 0.8);
 }
 .bold {
   font-weight: 600;
