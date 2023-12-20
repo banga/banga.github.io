@@ -143,6 +143,7 @@ export async function renderPostAsync(post: PostData): Promise<ReactElement> {
       title={post.title}
       description={post.description}
       relativeUrl={post.relativePath}
+      type="article"
     >
       <Post>{await renderPostContentAsync(post.content)}</Post>
     </Page>

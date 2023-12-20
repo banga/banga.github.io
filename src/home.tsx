@@ -50,6 +50,7 @@ export function HomePage() {
       title="Shrey Banga"
       description="Shrey Banga's home page and blog"
       relativeUrl="/"
+      type="website"
     >
       <Home />
     </Page>

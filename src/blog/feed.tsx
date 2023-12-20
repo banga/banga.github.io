@@ -42,6 +42,7 @@ export async function renderBlogFeedAsync(
       title="Shrey Banga's blog"
       description="Shrey Banga's blog"
       relativeUrl="/blog"
+      type="website"
     >
       <Feed>{postPreviews}</Feed>
     </Page>
