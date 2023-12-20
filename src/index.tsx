@@ -20,7 +20,12 @@ function renderElementToFile(element: ReactElement, outputPath: string) {
 
 function readPosts(postsPath: string): PostData[] {
   const postPaths = fs.readdirSync(postsPath);
-  return postPaths.map((postPath) => readPost(path.join(postsPath, postPath)));
+  const posts = postPaths.map((postPath) =>
+    readPost(path.join(postsPath, postPath))
+  );
+  // Newest first. This matters when rendering the feed.
+  posts.sort((a, b) => (a.createdDate < b.createdDate ? 1 : -1));
+  return posts;
 }
 
 async function writePostsAsync({
