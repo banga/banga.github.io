@@ -23,7 +23,8 @@ function writeFile(filePath: string, contents: string | Buffer) {
 }
 
 function renderElementToFile(element: ReactElement, outputPath: string) {
-  writeFile(outputPath, renderToStaticMarkup(element));
+  const html = renderToStaticMarkup(element);
+  writeFile(outputPath, `<!DOCTYPE html>\n${html}`);
 }
 
 function writeBlogPosts({
