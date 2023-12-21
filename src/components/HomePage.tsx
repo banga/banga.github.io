@@ -1,6 +1,6 @@
 import React from "react";
-import { Page } from "./page.js";
-import { SocialIcons } from "./social.js";
+import { Page } from "./Page.js";
+import { SocialIcons } from "./SocialIcons.js";
 
 function Home() {
   return (

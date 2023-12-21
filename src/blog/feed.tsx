@@ -1,15 +1,13 @@
 import React, { ReactElement, ReactNode } from "react";
-import { Page } from "../page.js";
-import { Header } from "./header.js";
-import { Footer } from "./footer.js";
-import { PostData } from "./post.js";
-import { renderDate } from "./date.js";
+import { Page } from "../components/Page.js";
+import { Header } from "../components/Header.js";
+import { Footer } from "../components/Footer.js";
+import { BlogPostData } from "./blog_post.js";
+import { renderDate } from "../date.js";
 
-export async function renderPostPreviewAsync(
-  post: PostData
-): Promise<ReactElement> {
+function PostPreview({ post }: { post: BlogPostData }): ReactElement {
   return (
-    <div key={post.relativePath} className="mt1 pb1">
+    <div className="mt1 pb1">
       <div>
         <a href={post.relativePath}>{post.title}</a>
       </div>
@@ -34,12 +32,15 @@ function Feed({
   );
 }
 
-export async function renderBlogFeedAsync(
-  posts: PostData[],
-  hostname: string,
-  blogUrl: string
-): Promise<ReactElement> {
-  const postPreviews = await Promise.all(posts.map(renderPostPreviewAsync));
+export function BlogFeed({
+  posts,
+  hostname,
+  blogUrl,
+}: {
+  posts: BlogPostData[];
+  hostname: string;
+  blogUrl: string;
+}): ReactElement {
   return (
     <Page
       title="Shrey Banga's blog"
@@ -47,7 +48,11 @@ export async function renderBlogFeedAsync(
       canonicalUrl={blogUrl}
       type="website"
     >
-      <Feed hostname={hostname}>{postPreviews}</Feed>
+      <Feed hostname={hostname}>
+        {posts.map((post, i) => (
+          <PostPreview post={post} key={i} />
+        ))}
+      </Feed>
     </Page>
   );
 }

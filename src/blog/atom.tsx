@@ -1,27 +1,29 @@
-import { PostData, renderPostContentAsync } from "./post.js";
+import { BlogPostData } from "./blog_post.js";
 import { renderToStaticMarkup } from "react-dom/server";
 import { encode } from "html-entities";
+import React from "react";
+import { BlogPostContent } from "../markdown/BlogPostContent.js";
 
-async function renderPostEntryAsync({
+function renderPostEntry({
   post,
   baseUrl,
   blogUrl,
 }: {
-  post: PostData;
+  post: BlogPostData;
   baseUrl: string;
   blogUrl: string;
-}): Promise<string> {
+}): string {
   const postUrl = new URL(post.relativePath, blogUrl);
   const postHtml = renderToStaticMarkup(
     // Render content tweaked for atom feeds:
     // - Don't insert anchor links next to headings, since the css doesn't translate
     // - Convert relative urls to absolute urls
-    await renderPostContentAsync({
-      content: post.content,
-      autolinkHeadings: false,
-      absoluteUrls: true,
-      baseUrl,
-    })
+    <BlogPostContent
+      content={post.content}
+      autolinkHeadings={false}
+      absoluteUrls={true}
+      baseUrl={baseUrl}
+    />
   );
 
   return `
@@ -38,19 +40,19 @@ async function renderPostEntryAsync({
     `.trim();
 }
 
-export async function renderAtomFeedForBlogAsync({
+export function renderAtomFeedForBlog({
   posts,
   baseUrl,
   blogUrl,
   atomFeedUrl,
 }: {
-  posts: PostData[];
+  posts: BlogPostData[];
   baseUrl: string;
   blogUrl: string;
   atomFeedUrl: string;
-}): Promise<string> {
-  const entries = await Promise.all(
-    posts.map((post) => renderPostEntryAsync({ post, baseUrl, blogUrl }))
+}): string {
+  const entries = posts.map((post) =>
+    renderPostEntry({ post, baseUrl, blogUrl })
   );
   const lastUpdated = posts
     .map((p) => p.createdDate)

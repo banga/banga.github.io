@@ -14,7 +14,7 @@ export function Page({
   canonicalUrl: string;
   type: "website" | "article";
   ogImageUrl?: string;
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }): ReactElement {
   const cacheBuster = Date.now().toString();
   return (

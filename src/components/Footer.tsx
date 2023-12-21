@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialIcons } from "../social.js";
+import { SocialIcons } from "./SocialIcons.js";
 
 export function Footer() {
   return (

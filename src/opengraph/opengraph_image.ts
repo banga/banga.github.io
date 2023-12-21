@@ -5,7 +5,7 @@ import satori, { SatoriOptions } from "satori";
 import { Resvg } from "@resvg/resvg-js";
 
 const FONT_DIR = new URL(
-  "../node_modules/@fontsource/inter/files/",
+  "../../node_modules/@fontsource/inter/files/",
   import.meta.url
 ).pathname;
 
@@ -22,10 +22,9 @@ export function fontFamily(weight: (typeof FONT_WEIGHTS)[number]): string {
   return `inter-${weight}`;
 }
 
-export async function writeOGImageAsync(
-  element: ReactElement,
-  outputPath: string
-) {
+export async function generateOpenGraphImageAsync(
+  element: ReactElement
+): Promise<Buffer> {
   const svg = await satori(element, {
     width: 800,
     height: 400,
@@ -34,7 +33,7 @@ export async function writeOGImageAsync(
   const resvg = new Resvg(svg, {
     fitTo: { mode: "original" },
     font: { loadSystemFonts: false },
-    logLevel: "warn",
+    // logLevel: "warn",
   });
-  fs.writeFileSync(outputPath, resvg.render().asPng());
+  return resvg.render().asPng();
 }
