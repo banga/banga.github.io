@@ -4,7 +4,6 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import Markdown from "react-markdown";
 import remarkMath from "remark-math";
-import rehypeMathjax from "rehype-mathjax";
 import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
@@ -12,6 +11,7 @@ import { AutolinkedHeading } from "./autolinkedheading.js";
 import { Page } from "../page.js";
 import { fontFamily } from "../og-image.js";
 import { renderDate } from "./date.js";
+import rehypeKatex from "rehype-katex";
 
 export type PostData = {
   title: string;
@@ -104,7 +104,15 @@ export async function renderPostContentAsync({
   return (
     <Markdown
       remarkPlugins={[remarkMath]}
-      rehypePlugins={[rehypeMathjax]}
+      rehypePlugins={[
+        [
+          rehypeKatex,
+          {
+            // Produces both svg and mathml by default, which is unnecessary
+            output: "mathml",
+          },
+        ],
+      ]}
       urlTransform={
         absoluteUrls
           ? (url) =>
