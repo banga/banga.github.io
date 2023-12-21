@@ -4,9 +4,9 @@
   --text-color: #e0e0e0;
   --external-link-color: #fff;
   --icon-fill-color: #fff;
+  --link-color: #6cbaff;
   color-scheme: dark;
 
-  --link-color: #1e88e5;
   --border-color: #878b995a;
   --code-block-color: #262a2e;
 }
@@ -17,6 +17,7 @@
     --text-color: #333;
     --external-link-color: #111;
     --icon-fill-color: #000;
+    --link-color: #1e88e5;
     color-scheme: light;
   }
 }
