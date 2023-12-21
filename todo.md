@@ -1,7 +1,7 @@
-[ ] RSS support
-[ ] Handle footnotes
 [ ] Convenince to insert relative links to other posts reliably
 [ ] Add og images for home and blog feed pages
+[x] RSS support
+[x] Handle footnotes
 [x] Generate page previews for social media
 [x] Generate SEO tags
 [x] Anchor links to subheadings

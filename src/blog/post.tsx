@@ -12,6 +12,7 @@ import { Page } from "../page.js";
 import { fontFamily } from "../og-image.js";
 import { renderDate } from "./date.js";
 import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
 
 export type PostData = {
   title: string;
@@ -103,7 +104,7 @@ export async function renderPostContentAsync({
 
   return (
     <Markdown
-      remarkPlugins={[remarkMath]}
+      remarkPlugins={[remarkMath, remarkGfm]}
       rehypePlugins={[
         [
           rehypeKatex,
