@@ -3,11 +3,11 @@
   --background-color: #15181a;
   --text-color: #e0e0e0;
   --external-link-color: #fff;
+  --icon-fill-color: #fff;
   color-scheme: dark;
 
   --link-color: #1e88e5;
   --border-color: #878b995a;
-  --icon-fill-color: #8c91a5;
   --code-block-color: #262a2e;
 }
 
@@ -16,6 +16,7 @@
     --background-color: #fff;
     --text-color: #333;
     --external-link-color: #111;
+    --icon-fill-color: #000;
     color-scheme: light;
   }
 }
