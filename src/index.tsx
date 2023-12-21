@@ -109,12 +109,11 @@ function writeHomepage(outputDir: string, baseUrl: string) {
 }
 
 async function main() {
-  const [
-    baseUrl = "https://shreyb.dev",
-    postsDir = "./posts",
-    outputDir = "./_site/",
-    blogPath = "/blog/",
-  ] = process.argv.slice(2);
+  const baseUrl = process.env["BASE_URL"] ?? "https://shreyb.dev";
+  const postsDir = process.env["POSTS_DIR"] ?? "./posts";
+  const outputDir = process.env["OUTPUT_DIR"] ?? "./_site/";
+  const blogPath = process.env["BLOG_PATH"] ?? "/blog/";
+
   console.log({ baseUrl, postsDir, outputDir, blogPath });
 
   const posts = readPosts(postsDir);

@@ -5,10 +5,14 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
-    "compile": "tsc",
+    "compile": "tsc --build",
     "build": "node build/index.js",
-    "build:dev": "node build/index.js http://localhost:8080",
-    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts,tsx,json,md,css -x \"npm run compile && npm run build:dev || exit 1\" "
+    "build:watch": "./node_modules/nodemon/bin/nodemon.js",
+    "draft:watch": "POSTS_DIR=./drafts npm run build:watch"
+  },
+  "nodemonConfig": {
+    "ext": "ts,tsx,json,md,css",
+    "exec": "npm run compile && npm run build || exit 1"
   },
   "author": "",
   "license": "ISC",
