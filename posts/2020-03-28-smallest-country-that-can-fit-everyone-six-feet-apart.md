@@ -64,8 +64,6 @@ us around **10.5 million** people.
 much higher than the most densely populated countries and territories in the
 world[^5].
 
-## References
-
 [^1]: [Circle packing - Wikipedia](https://en.wikipedia.org/wiki/Circle_packing)
 [^2]: [Current World Population - Worldometers](https://www.worldometers.info/world-population/)
 [^3]: [Prevention of Coronavirus Disease 2019 (COVID-19) - CDC](https://www.cdc.gov/coronavirus/2019-ncov/prepare/prevention.html)
