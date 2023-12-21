@@ -11,6 +11,7 @@ import { HomePage } from "./home.js";
 import { renderBlogFeedAsync } from "./blog/feed.js";
 import { renderToStaticMarkup } from "react-dom/server";
 import { writeOGImageAsync } from "./og-image.js";
+import { renderAtomFeedForBlogAsync } from "./blog/atom.js";
 
 function renderElementToFile(element: ReactElement, outputPath: string) {
   fs.writeFileSync(outputPath, renderToStaticMarkup(element));
@@ -71,23 +72,34 @@ async function writeBlogAsync({
   blogPath,
   posts,
   hostname,
+  baseUrl,
   blogUrl,
 }: {
   outputDir: string;
   blogPath: string;
   posts: PostData[];
   hostname: string;
+  baseUrl: string;
   blogUrl: string;
 }) {
   await writePostsAsync({ outputDir, blogPath, posts, hostname, blogUrl });
 
   // Write the feed
-  const outputPath = path.join(outputDir, blogPath, "index.html");
-  console.log(`Writing blog feed to ${outputPath}`);
+  const blogOutputPath = path.join(outputDir, blogPath, "index.html");
+  console.log(`Writing blog feed to ${blogOutputPath}`);
   renderElementToFile(
     await renderBlogFeedAsync(posts, hostname, blogUrl),
-    outputPath
+    blogOutputPath
   );
+
+  const atomFeed = await renderAtomFeedForBlogAsync({
+    posts,
+    baseUrl,
+    blogUrl,
+    atomFeedUrl: blogUrl + "/atom.xml",
+  });
+  const atomOutputPath = path.join(outputDir, blogPath, "atom.xml");
+  fs.writeFileSync(atomOutputPath, atomFeed);
 }
 
 function writeHomepage(outputDir: string, baseUrl: string) {
@@ -111,7 +123,14 @@ async function main() {
   const hostname = new URL("", baseUrl).hostname;
   const blogUrl = new URL(blogPath, baseUrl).toString();
 
-  await writeBlogAsync({ outputDir, blogPath, posts, hostname, blogUrl });
+  await writeBlogAsync({
+    outputDir,
+    blogPath,
+    posts,
+    hostname,
+    baseUrl,
+    blogUrl,
+  });
 
   writeHomepage(outputDir, baseUrl);
 }

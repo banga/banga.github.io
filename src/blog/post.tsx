@@ -81,9 +81,16 @@ export function readPost(filePath: string): PostData {
   };
 }
 
-export async function renderPostContentAsync(
-  content: string
-): Promise<ReactElement> {
+export async function renderPostContentAsync({
+  content,
+  baseUrl,
+  absoluteUrls,
+}: {
+  content: string;
+} & (
+  | { baseUrl: string; absoluteUrls: true }
+  | { absoluteUrls: false; baseUrl?: never }
+)): Promise<ReactElement> {
   const codeStyle = (
     await import(
       // @ts-expect-error: this abomination is needed to load the theme
@@ -96,6 +103,12 @@ export async function renderPostContentAsync(
     <Markdown
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeMathjax]}
+      urlTransform={
+        absoluteUrls
+          ? (url) =>
+              url.startsWith("/") ? new URL(url, baseUrl).toString() : url
+          : undefined
+      }
       components={{
         h2: AutolinkedHeading,
         h3: AutolinkedHeading,
@@ -171,7 +184,10 @@ export async function renderPostAsync({
       type="article"
     >
       <Post hostname={hostname}>
-        {await renderPostContentAsync(post.content)}
+        {await renderPostContentAsync({
+          content: post.content,
+          absoluteUrls: false,
+        })}
       </Post>
     </Page>
   );

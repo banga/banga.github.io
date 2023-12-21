@@ -22,6 +22,12 @@ export function Page({
       <head>
         <meta charSet="utf-8" />
         <link rel="canonical" href={canonicalUrl} />
+        <link
+          href="/blog/atom.xml"
+          type="application/atom+xml"
+          rel="alternate"
+          title="Blog atom feed"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description} />
         <meta

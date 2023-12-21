@@ -116,8 +116,17 @@
 .align-baseline {
   align-items: baseline;
 }
+.align-start {
+  align-items: flex-start;
+}
+.align-end {
+  align-items: flex-end;
+}
 .flex-wrap {
   flex-wrap: wrap;
+}
+.gap-1 {
+  gap: var(--spacing-size);
 }
 
 /* Borders */

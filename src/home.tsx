@@ -1,8 +1,6 @@
 import React from "react";
 import { Page } from "./page.js";
-import { LinkedIn } from "./icons/linkedin.js";
-import { Twitter } from "./icons/twitter.js";
-import { Mastodon } from "./icons/mastodon.js";
+import { SocialIcons } from "./social.js";
 
 function Home() {
   return (
@@ -28,16 +26,8 @@ function Home() {
           <a href="https://github.com/banga">GitHub</a>. I also write to my{" "}
           <a href="/blog">blog</a> on occasion.
         </div>
-        <div className="m1 flex-row">
-          <a className="mr1" href="https://www.linkedin.com/in/shrey-banga">
-            <LinkedIn />
-          </a>
-          <a className="mr1" href="https://twitter.com/banga_shrey">
-            <Twitter />
-          </a>
-          <a rel="me" href="https://hachyderm.io/@shrey">
-            <Mastodon />
-          </a>
+        <div className="m1">
+          <SocialIcons />
         </div>
       </div>
     </div>

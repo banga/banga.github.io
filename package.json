@@ -21,6 +21,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.16",
     "@resvg/resvg-js": "^2.6.0",
+    "html-entities": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
