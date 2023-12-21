@@ -92,13 +92,15 @@ async function writeBlogAsync({
     blogOutputPath
   );
 
+  const atomFeedUrl = new URL("atom.xml", blogUrl).toString();
   const atomFeed = await renderAtomFeedForBlogAsync({
     posts,
     baseUrl,
     blogUrl,
-    atomFeedUrl: blogUrl + "/atom.xml",
+    atomFeedUrl,
   });
   const atomOutputPath = path.join(outputDir, blogPath, "atom.xml");
+  console.log(`Writing atom feed ${atomFeedUrl} to ${atomOutputPath}`);
   fs.writeFileSync(atomOutputPath, atomFeed);
 }
 
