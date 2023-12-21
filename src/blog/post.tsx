@@ -84,9 +84,11 @@ export function readPost(filePath: string): PostData {
 export async function renderPostContentAsync({
   content,
   baseUrl,
+  autolinkHeadings,
   absoluteUrls,
 }: {
   content: string;
+  autolinkHeadings: boolean;
 } & (
   | { baseUrl: string; absoluteUrls: true }
   | { absoluteUrls: false; baseUrl?: never }
@@ -110,8 +112,6 @@ export async function renderPostContentAsync({
           : undefined
       }
       components={{
-        h2: AutolinkedHeading,
-        h3: AutolinkedHeading,
         // Syntax highlight code blocks if possible
         code(props) {
           const { children, className, node, ref, ...rest } = props;
@@ -143,6 +143,9 @@ export async function renderPostContentAsync({
             </code>
           );
         },
+        ...(autolinkHeadings
+          ? { h2: AutolinkedHeading, h3: AutolinkedHeading }
+          : {}),
       }}
     >
       {content}
@@ -186,6 +189,7 @@ export async function renderPostAsync({
       <Post hostname={hostname}>
         {await renderPostContentAsync({
           content: post.content,
+          autolinkHeadings: true,
           absoluteUrls: false,
         })}
       </Post>

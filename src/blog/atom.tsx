@@ -13,9 +13,12 @@ async function renderPostEntryAsync({
 }): Promise<string> {
   const postUrl = new URL(post.relativePath, blogUrl);
   const postHtml = renderToStaticMarkup(
-    // TODO: Avoid doing this twice
+    // Render content tweaked for atom feeds:
+    // - Don't insert anchor links next to headings, since the css doesn't translate
+    // - Convert relative urls to absolute urls
     await renderPostContentAsync({
       content: post.content,
+      autolinkHeadings: false,
       absoluteUrls: true,
       baseUrl,
     })
