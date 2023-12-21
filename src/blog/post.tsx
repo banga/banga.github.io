@@ -242,7 +242,7 @@ export function PostOGImage({
           {post.title}
         </div>
         <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <div style={{ color: "#55abd9" }}>{hostname}</div>•
+          <div style={{ color: "#1e88e5" }}>{hostname}</div>•
           <div>{renderDate(post.createdDate)}</div>
         </div>
       </div>
