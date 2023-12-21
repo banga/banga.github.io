@@ -5,14 +5,12 @@ import {
   PostData,
   readPost,
   renderPostAsync,
-  renderPostContentAsync,
   PostOGImage,
 } from "./blog/post.js";
 import { HomePage } from "./home.js";
 import { renderBlogFeedAsync } from "./blog/feed.js";
 import { renderToStaticMarkup } from "react-dom/server";
 import { writeOGImageAsync } from "./og-image.js";
-import { hostname } from "node:os";
 
 function renderElementToFile(element: ReactElement, outputPath: string) {
   fs.writeFileSync(outputPath, renderToStaticMarkup(element));

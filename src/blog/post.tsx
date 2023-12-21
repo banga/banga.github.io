@@ -57,9 +57,9 @@ export function readPost(filePath: string): PostData {
     .name.split("-");
   const outputFileName = rest.join("-") + ".html";
   const relativePath = path.join(
-    createdYear,
-    createdMonth,
-    createdDay,
+    createdYear!,
+    createdMonth!,
+    createdDay!,
     outputFileName
   );
   const relativeOgImagePath = relativePath.replace(".html", ".png");
@@ -68,7 +68,7 @@ export function readPost(filePath: string): PostData {
 
   // Extract out the title using regex for now
   const titleMatch = content.match(/^\s*#\s+(?<title>.+)/);
-  const title = titleMatch?.groups?.title ?? "";
+  const title = titleMatch?.groups?.["title"] ?? "";
   const description = getPostDescription(content);
 
   return {
@@ -103,9 +103,8 @@ export async function renderPostContentAsync(
         code(props) {
           const { children, className, node, ref, ...rest } = props;
           const [_, language] = /language-(\w+)/.exec(className || "") ?? [];
-          return ReactSyntaxHighlighter.supportedLanguages.includes(
-            language
-          ) ? (
+          return language &&
+            ReactSyntaxHighlighter.supportedLanguages.includes(language) ? (
             <ReactSyntaxHighlighter
               children={String(children).replace(/\n$/, "")}
               language={language}

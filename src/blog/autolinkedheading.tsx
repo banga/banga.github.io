@@ -4,7 +4,7 @@ export function AutolinkedHeading(
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
-  > & { node?: import("hast").Element }
+  > & { node?: import("hast").Element | undefined }
 ) {
   const { children, node, ...rest } = props;
   if (node === undefined) {
