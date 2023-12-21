@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "compile": "tsc --build",
-    "build": "node build/index.js",
+    "build": "TZ=UTC node build/index.js",
     "build:watch": "./node_modules/nodemon/bin/nodemon.js",
     "draft:watch": "POSTS_DIR=./drafts npm run build:watch"
   },

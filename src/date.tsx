@@ -1,4 +1,5 @@
 // We are rendering on the server, so standardize to one locale and options
+// Timezone should be set to UTC (via TZ=UTC)
 const OPTIONS: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "long",

@@ -47,15 +47,26 @@ function getBlogPostDescription(content: string): string {
   return lines.join("\n");
 }
 
+const BLOG_POST_FILE_NAME_RE =
+  /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<name>.+)\.md$/;
+const BLOG_POST_TITLE_RE = /^\s*#\s+(?<title>.+)/;
+
 function readBlogPost(filePath: string): BlogPostData {
-  const [createdYear, createdMonth, createdDay, ...rest] = path
-    .parse(filePath)
-    .name.split("-");
-  const outputFileName = rest.join("-") + ".html";
+  const fileName = path.basename(filePath);
+  const result = BLOG_POST_FILE_NAME_RE.exec(fileName);
+  if (!result || !result.groups) {
+    throw `${filePath} does not match the expected format of yyyy-mm-dd-name.md`;
+  }
+
+  const createdYear = result.groups["year"]!;
+  const createdMonth = result.groups["month"]!;
+  const createdDay = result.groups["day"]!;
+  const outputFileName = result.groups["name"]! + ".html";
+
   const relativePath = path.join(
-    createdYear!,
-    createdMonth!,
-    createdDay!,
+    createdYear,
+    createdMonth,
+    createdDay,
     outputFileName
   );
   const relativeOpenGraphImagePath = relativePath.replace(".html", ".png");
@@ -63,9 +74,13 @@ function readBlogPost(filePath: string): BlogPostData {
   const content = fs.readFileSync(filePath, "utf-8");
 
   // Extract out the title using regex for now
-  const titleMatch = content.match(/^\s*#\s+(?<title>.+)/);
+  const titleMatch = content.match(BLOG_POST_TITLE_RE);
   const title = titleMatch?.groups?.["title"] ?? "";
   const description = getBlogPostDescription(content);
+
+  const createdDate = new Date(
+    `${createdYear}-${createdMonth}-${createdDay}T00:00:00.000Z`
+  );
 
   return {
     title,
@@ -73,7 +88,7 @@ function readBlogPost(filePath: string): BlogPostData {
     content,
     relativePath,
     relativeOpenGraphImagePath,
-    createdDate: new Date(`${createdYear}-${createdMonth}-${createdDay}`),
+    createdDate,
   };
 }
 

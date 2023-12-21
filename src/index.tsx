@@ -12,6 +12,7 @@ import { BlogFeed } from "./blog/feed.js";
 import { renderToStaticMarkup } from "react-dom/server";
 import { generateOpenGraphImageAsync } from "./opengraph/opengraph_image.js";
 import { renderAtomFeedForBlog } from "./blog/atom.js";
+import assert from "node:assert";
 
 function writeFile(filePath: string, contents: string | Buffer) {
   console.log(`Writing ${filePath}`);
@@ -127,8 +128,17 @@ async function main() {
   const postsDir = process.env["POSTS_DIR"] ?? "./posts";
   const outputDir = process.env["OUTPUT_DIR"] ?? "./_site/";
   const blogPath = process.env["BLOG_PATH"] ?? "/blog/";
+  const timeZone = process.env["TZ"];
 
-  console.log({ baseUrl, postsDir, outputDir, blogPath });
+  console.log({
+    baseUrl,
+    postsDir,
+    outputDir,
+    blogPath,
+    timeZone,
+  });
+
+  assert.equal(new Date().getTimezoneOffset(), 0, `Time-zone should be UTC`);
 
   const posts = readBlogPosts(postsDir);
 
