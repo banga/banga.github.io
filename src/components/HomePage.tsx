@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="m2 flex-col">
       <div className="flex-col">
-        <img className="m1 circle photo" src="me.jpg" alt="me" />
+        <img className="m1 circle photo" src="assets/me.jpg" alt="me" />
       </div>
       <div className="flex-col">
         <div className="m1">
