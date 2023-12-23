@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import * as fs from "node:fs";
-import * as path from "node:path";
+import fs from "node:fs";
+import path from "node:path";
 import satori, { SatoriOptions } from "satori";
 import { Resvg } from "@resvg/resvg-js";
 

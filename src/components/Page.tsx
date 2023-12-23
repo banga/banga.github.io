@@ -2,9 +2,7 @@ import React from "react";
 import { ReactElement } from "react";
 import { BuildContext } from "./build_context.js";
 import { AutoReloadScript } from "../auto_reload.js";
-
-export const CSS_FILE_PATH = new URL("../../_site/style.css", import.meta.url)
-  .pathname;
+import { CSS_FILE_PATH } from "../consts.js";
 
 export function Page({
   title,
@@ -59,11 +57,9 @@ export function Page({
               // change its source. We could also instead generate a unique name
               // for the file based on the hash of its contents, but this is
               // easier.
-              href={`/style.css?${buildContext.cssCacheBuster}`}
+              href={`/${CSS_FILE_PATH}?${buildContext.cssCacheBuster}`}
             />
-            {buildContext.shouldAutoReload && (
-              <AutoReloadScript hashFile={buildContext.hashFile} />
-            )}
+            {buildContext.shouldAutoReload && <AutoReloadScript />}
           </head>
           <body>{children}</body>
         </html>

@@ -3,17 +3,21 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { encode } from "html-entities";
 import React from "react";
 import { BlogPostContent } from "../markdown/BlogPostContent.js";
+import { BuildContextType } from "../components/build_context.js";
+import { ATOM_FILE_NAME, BLOG_PATH } from "../consts.js";
+import path from "node:path";
 
 function renderPostEntry({
   post,
-  baseUrl,
-  blogUrl,
+  buildContext,
 }: {
   post: BlogPostData;
-  baseUrl: string;
-  blogUrl: string;
+  buildContext: BuildContextType;
 }): string {
-  const postUrl = new URL(post.relativePath, blogUrl);
+  const postUrl = new URL(
+    path.join(BLOG_PATH, post.relativePath),
+    buildContext.baseUrl
+  );
   const postHtml = renderToStaticMarkup(
     // Render content tweaked for atom feeds:
     // - Don't insert anchor links next to headings, since the css doesn't translate
@@ -22,7 +26,7 @@ function renderPostEntry({
       content={post.content}
       autolinkHeadings={false}
       absoluteUrls={true}
-      baseUrl={baseUrl}
+      baseUrl={buildContext.baseUrl}
     />
   );
 
@@ -42,18 +46,17 @@ function renderPostEntry({
 
 export function renderAtomFeedForBlog({
   posts,
-  baseUrl,
-  blogUrl,
-  atomFeedUrl,
+  buildContext,
 }: {
   posts: BlogPostData[];
-  baseUrl: string;
-  blogUrl: string;
-  atomFeedUrl: string;
+  buildContext: BuildContextType;
 }): string {
-  const entries = posts.map((post) =>
-    renderPostEntry({ post, baseUrl, blogUrl })
-  );
+  const atomFeedUrl = new URL(
+    path.join(BLOG_PATH, ATOM_FILE_NAME),
+    buildContext.baseUrl
+  ).toString();
+
+  const entries = posts.map((post) => renderPostEntry({ post, buildContext }));
   const lastUpdated = posts
     .map((p) => p.createdDate)
     .reduce((a, b) => (a > b ? a : b), posts[0]!.createdDate);

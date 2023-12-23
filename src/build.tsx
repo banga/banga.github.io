@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import fs from "node:fs";
 import path from "node:path";
 import {
   BlogPostData,
@@ -14,9 +13,10 @@ import { generateOpenGraphImageAsync } from "./opengraph/opengraph_image.js";
 import { renderAtomFeedForBlog } from "./blog/atom.js";
 import assert from "node:assert";
 import { BuildContext, BuildContextType } from "./components/build_context.js";
-import { CSS_FILE_PATH } from "./components/Page.js";
 import { writeBuildHash } from "./auto_reload.js";
-import { writeFile } from "./writeFile.js";
+import { writeFile } from "./write_file.js";
+import * as consts from "./consts.js";
+import { BLOG_PATH, OUTPUT_DIR } from "./consts.js";
 
 function renderElementToFile({
   element,
@@ -35,169 +35,76 @@ function renderElementToFile({
   writeFile(outputPath, `<!DOCTYPE html>\n${html}`);
 }
 
-function writeBlogPosts({
-  outputDir,
-  blogPath,
-  posts,
-  hostname,
-  blogUrl,
-  buildContext,
-}: {
-  outputDir: string;
-  blogPath: string;
-  posts: BlogPostData[];
-  hostname: string;
-  blogUrl: string;
-  buildContext: BuildContextType;
-}) {
+function writeBlogPosts(buildContext: BuildContextType, posts: BlogPostData[]) {
   for (const post of posts) {
-    const postElement = (
-      <BlogPost post={post} hostname={hostname} blogUrl={blogUrl} />
-    );
-    const outputPath = path.join(outputDir, blogPath, post.relativePath);
+    const postElement = <BlogPost post={post} />;
+    const outputPath = path.join(OUTPUT_DIR, BLOG_PATH, post.relativePath);
     renderElementToFile({ element: postElement, outputPath, buildContext });
   }
 }
 
-async function writeBlogPostOpenGraphImagesAsync({
-  outputDir,
-  blogPath,
-  posts,
-  hostname,
-}: {
-  outputDir: string;
-  blogPath: string;
-  posts: BlogPostData[];
-  hostname: string;
-}) {
+async function writeBlogPostOpenGraphImagesAsync(
+  buildContext: BuildContextType,
+  posts: BlogPostData[]
+) {
   await Promise.all(
     posts.map(async (post) => {
       const openGraphImageOutputPath = path.join(
-        outputDir,
-        blogPath,
+        OUTPUT_DIR,
+        BLOG_PATH,
         post.relativeOpenGraphImagePath
       );
 
       const imageBuffer = await generateOpenGraphImageAsync(
-        <BlogPostOpenGraphImage post={post} hostname={hostname} />
+        // Can't use context provider here because `satori` can't handle it
+        <BlogPostOpenGraphImage post={post} baseUrl={buildContext.baseUrl} />
       );
       writeFile(openGraphImageOutputPath, imageBuffer);
     })
   );
 }
 
-async function writeBlogAsync({
-  outputDir,
-  blogPath,
-  posts,
-  hostname,
-  baseUrl,
-  blogUrl,
-  buildContext,
-}: {
-  outputDir: string;
-  blogPath: string;
-  posts: BlogPostData[];
-  hostname: string;
-  baseUrl: string;
-  blogUrl: string;
-  buildContext: BuildContextType;
-}) {
+async function writeBlogAsync(
+  buildContext: BuildContextType,
+  posts: BlogPostData[]
+) {
   // Blog posts and their opengraph preview images
-  writeBlogPosts({
-    outputDir,
-    blogPath,
-    posts,
-    hostname,
-    blogUrl,
-    buildContext,
-  });
-  await writeBlogPostOpenGraphImagesAsync({
-    outputDir,
-    blogPath,
-    posts,
-    hostname,
-  });
+  writeBlogPosts(buildContext, posts);
+  await writeBlogPostOpenGraphImagesAsync(buildContext, posts);
 
   // Write the feed
-  const blogOutputPath = path.join(outputDir, blogPath, "index.html");
+  const blogOutputPath = path.join(OUTPUT_DIR, BLOG_PATH, "index.html");
   renderElementToFile({
-    element: <BlogFeed posts={posts} hostname={hostname} blogUrl={blogUrl} />,
+    element: <BlogFeed posts={posts} />,
     outputPath: blogOutputPath,
     buildContext,
   });
 
   // Write the atom feed for the blog
-  const atomFeedUrl = new URL("atom.xml", blogUrl).toString();
-  const atomFeed = renderAtomFeedForBlog({
-    posts,
-    baseUrl,
-    blogUrl,
-    atomFeedUrl,
-  });
-  const atomOutputPath = path.join(outputDir, blogPath, "atom.xml");
+  const atomFeed = renderAtomFeedForBlog({ posts, buildContext });
+  const atomOutputPath = path.join(OUTPUT_DIR, BLOG_PATH, "atom.xml");
   writeFile(atomOutputPath, atomFeed);
 }
 
-function writeHomepage({
-  outputDir,
-  baseUrl,
-  buildContext,
-}: {
-  outputDir: string;
-  baseUrl: string;
-  buildContext: BuildContextType;
-}) {
-  const outputPath = path.join(outputDir, "index.html");
+function writeHomepage(buildContext: BuildContextType) {
+  const outputPath = path.join(OUTPUT_DIR, "index.html");
   renderElementToFile({
-    element: <HomePage baseUrl={baseUrl} />,
+    element: <HomePage />,
     outputPath,
     buildContext,
   });
 }
 
-export async function buildAsync({
-  baseUrl,
-  postsDir,
-  outputDir,
-  blogPath,
-  shouldAutoReload,
-  hashFile,
-}: {
-  baseUrl: string;
-  postsDir: string;
-  outputDir: string;
-  blogPath: string;
-  shouldAutoReload: boolean;
-  hashFile: string;
-}) {
+export async function buildAsync(buildContext: BuildContextType) {
   assert.equal(new Date().getTimezoneOffset(), 0, `Time-zone should be UTC`);
 
-  const cssCacheBuster = fs.statSync(CSS_FILE_PATH).mtime.getTime().toString();
-  const buildContext: BuildContextType = {
-    cssCacheBuster,
-    shouldAutoReload,
-    hashFile,
-  };
+  console.log({ consts, buildContext });
 
-  const posts = readBlogPosts(postsDir);
+  const posts = readBlogPosts(buildContext);
 
-  const hostname = new URL("", baseUrl).hostname;
-  const blogUrl = new URL(blogPath, baseUrl).toString();
+  await writeBlogAsync(buildContext, posts);
 
-  await writeBlogAsync({
-    outputDir,
-    blogPath,
-    posts,
-    hostname,
-    baseUrl,
-    blogUrl,
-    buildContext,
-  });
+  writeHomepage(buildContext);
 
-  writeHomepage({ outputDir, baseUrl, buildContext });
-
-  if (buildContext.shouldAutoReload) {
-    writeBuildHash(outputDir, buildContext.hashFile);
-  }
+  writeBuildHash(buildContext);
 }

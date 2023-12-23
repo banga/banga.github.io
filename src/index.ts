@@ -1,33 +1,31 @@
+import path from "node:path";
+import fs from "node:fs";
 import { buildAsync } from "./build.js";
+import {
+  BuildContextType,
+  DEFAULT_BUILD_CONTEXT,
+} from "./components/build_context.js";
+import { OUTPUT_DIR, CSS_FILE_PATH } from "./consts.js";
 
 function main() {
-  const baseUrl = process.env["BASE_URL"] ?? "https://shreyb.dev";
-  const postsDir = process.env["POSTS_DIR"] ?? "./posts";
-  const outputDir = process.env["OUTPUT_DIR"] ?? "./_site/";
-  const blogPath = process.env["BLOG_PATH"] ?? "/blog/";
-  const shouldAutoReload = ["1", "yes", "true"].includes(
-    process.env["SHOULD_AUTO_RELOAD"] ?? ""
-  );
-  const hashFile = process.env["HASH_FILE"] ?? ".build-hash";
-  const timeZone = process.env["TZ"];
+  const baseUrl = process.env["BASE_URL"] ?? DEFAULT_BUILD_CONTEXT.baseUrl;
+  const postsDir = process.env["POSTS_DIR"] ?? DEFAULT_BUILD_CONTEXT.postsDir;
+  const shouldAutoReload = process.env["SHOULD_AUTO_RELOAD"]
+    ? ["1", "yes", "true"].includes(process.env["SHOULD_AUTO_RELOAD"] ?? "")
+    : DEFAULT_BUILD_CONTEXT.shouldAutoReload;
 
-  console.log({
+  const cssFilePath = path.join(OUTPUT_DIR, CSS_FILE_PATH);
+  const cssCacheBuster = fs.statSync(cssFilePath).mtime.getTime().toString();
+
+  const buildContext: BuildContextType = {
     baseUrl,
     postsDir,
-    outputDir,
-    blogPath,
-    timeZone,
-  });
-
-  buildAsync({
-    baseUrl,
-    postsDir,
-    outputDir,
-    blogPath,
+    cssCacheBuster,
     shouldAutoReload,
-    hashFile,
-  }).catch((e) => {
-    console.error("Build failed:", e);
+  };
+
+  buildAsync(buildContext).catch((e) => {
+    console.error("Build failed:\n", e);
     process.exit(1);
   });
 }

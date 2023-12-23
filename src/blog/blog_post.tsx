@@ -1,13 +1,15 @@
 import React from "react";
 import { ReactElement } from "react";
-import * as fs from "node:fs";
-import * as path from "node:path";
+import fs from "node:fs";
+import path from "node:path";
 import { Header } from "../components/Header.js";
 import { Footer } from "../components/Footer.js";
 import { Page } from "../components/Page.js";
 import { fontFamily } from "../opengraph/opengraph_image.js";
 import { renderDate } from "../date.js";
 import { BlogPostContent } from "../markdown/BlogPostContent.js";
+import { BuildContext, BuildContextType } from "../components/build_context.js";
+import { BLOG_PATH } from "../consts.js";
 
 export type BlogPostData = {
   title: string;
@@ -92,58 +94,58 @@ function readBlogPost(filePath: string): BlogPostData {
   };
 }
 
-export function readBlogPosts(postsPath: string): BlogPostData[] {
-  const postPaths = fs.readdirSync(postsPath);
+export function readBlogPosts(buildContext: BuildContextType): BlogPostData[] {
+  const postPaths = fs.readdirSync(buildContext.postsDir);
   const posts = postPaths.map((postPath) =>
-    readBlogPost(path.join(postsPath, postPath))
+    readBlogPost(path.join(buildContext.postsDir, postPath))
   );
   // Newest first. This matters when rendering the feed.
   posts.sort((a, b) => (a.createdDate < b.createdDate ? 1 : -1));
   return posts;
 }
 
-export function BlogPost({
-  post,
-  hostname,
-  blogUrl,
-}: {
-  post: BlogPostData;
-  hostname: string;
-  blogUrl: string;
-}): ReactElement {
+export function BlogPost({ post }: { post: BlogPostData }): ReactElement {
+  const postPath = path.join(BLOG_PATH, post.relativePath);
+  const ogImagePath = path.join(BLOG_PATH, post.relativeOpenGraphImagePath);
+
   return (
-    <Page
-      title={post.title}
-      description={post.description}
-      canonicalUrl={new URL(post.relativePath, blogUrl).toString()}
-      ogImageUrl={new URL(post.relativeOpenGraphImagePath, blogUrl).toString()}
-      type="article"
-    >
-      <div className="m1 flex-col">
-        <Header hostname={hostname} />
-        <BlogPostContent
-          content={post.content}
-          autolinkHeadings={true}
-          absoluteUrls={false}
-        />
-        <Footer />
-      </div>
-    </Page>
+    <BuildContext.Consumer>
+      {({ baseUrl }) => (
+        <Page
+          title={post.title}
+          description={post.description}
+          canonicalUrl={new URL(postPath, baseUrl).toString()}
+          ogImageUrl={new URL(ogImagePath, baseUrl).toString()}
+          type="article"
+        >
+          <div className="m1 flex-col">
+            <Header />
+            <BlogPostContent
+              content={post.content}
+              autolinkHeadings={true}
+              absoluteUrls={false}
+            />
+            <Footer />
+          </div>
+        </Page>
+      )}
+    </BuildContext.Consumer>
   );
 }
 
 export function BlogPostOpenGraphImage({
   post,
-  hostname,
+  baseUrl,
 }: {
   post: BlogPostData;
-  hostname: string;
+  baseUrl: string;
 }): ReactElement {
   // TODO: Switch to CSS-in-JS so we can share styles here
   // Copied from style.css
   const backgroundColor = "#15181a";
   const textColor = "#e0e0e0";
   const linkColor = "#1e88e5";
+  const hostname = new URL(baseUrl).hostname;
 
   return (
     <div

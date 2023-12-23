@@ -1,9 +1,14 @@
 import React from "react";
+import { BuildContext } from "./build_context.js";
 
-export function Header({ hostname }: { hostname: string }) {
+export function Header() {
   return (
-    <div>
-      <a href="/">{hostname}</a> / <a href="/blog">blog</a>
-    </div>
+    <BuildContext.Consumer>
+      {({ baseUrl }) => (
+        <div>
+          <a href="/">{new URL(baseUrl).hostname}</a> / <a href="/blog">blog</a>
+        </div>
+      )}
+    </BuildContext.Consumer>
   );
 }

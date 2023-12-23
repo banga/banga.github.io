@@ -1,6 +1,7 @@
 import React from "react";
 import { Page } from "./Page.js";
 import { SocialIcons } from "./SocialIcons.js";
+import { BuildContext } from "./build_context.js";
 
 function Home() {
   return (
@@ -34,15 +35,19 @@ function Home() {
   );
 }
 
-export function HomePage({ baseUrl }: { baseUrl: string }) {
+export function HomePage() {
   return (
-    <Page
-      title="Shrey Banga"
-      description="Shrey Banga's home page and blog"
-      canonicalUrl={baseUrl}
-      type="website"
-    >
-      <Home />
-    </Page>
+    <BuildContext.Consumer>
+      {({ baseUrl }) => (
+        <Page
+          title="Shrey Banga"
+          description="Shrey Banga's home page and blog"
+          canonicalUrl={baseUrl}
+          type="website"
+        >
+          <Home />
+        </Page>
+      )}
+    </BuildContext.Consumer>
   );
 }

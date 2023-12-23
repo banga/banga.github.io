@@ -1,8 +1,10 @@
 import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { writeFile } from "./writeFile.js";
+import { writeFile } from "./write_file.js";
 import React from "react";
+import { BuildContextType } from "./components/build_context.js";
+import { HASH_FILE, OUTPUT_DIR } from "./consts.js";
 
 // Provides very basic auto-reloading such that when any output files change,
 // all html pages reload themselves. This works as follows:
@@ -18,16 +20,20 @@ import React from "react";
 //   `-c-1` option. If caching were enabled, we would not see newer versions of
 //   the hash file.
 
-export function writeBuildHash(outputDir: string, hashFile: string) {
+export function writeBuildHash(buildContext: BuildContextType) {
+  if (!buildContext.shouldAutoReload) {
+    return;
+  }
+
   const hash = createHash("md5");
 
-  const hashFilePath = path.join(outputDir, hashFile);
+  const hashFilePath = path.join(OUTPUT_DIR, HASH_FILE);
   const inputFiles = fs
-    .readdirSync(outputDir, {
+    .readdirSync(OUTPUT_DIR, {
       encoding: "utf-8",
       recursive: true,
     })
-    .map((relativePath) => path.join(outputDir, relativePath))
+    .map((relativePath) => path.join(OUTPUT_DIR, relativePath))
     .filter((path) => fs.statSync(path).isFile() && path !== hashFilePath);
   inputFiles.sort();
 
@@ -42,30 +48,26 @@ export function writeBuildHash(outputDir: string, hashFile: string) {
   writeFile(hashFilePath, inputHash);
 }
 
-function generateAutoReloadScript(hashFile: string): string {
-  return `
-  async function setTimeoutAsync(delay) {
-    return new Promise(resolve => setTimeout(resolve, delay));
-  }
-  let prevHash = null;
-  while (true) {
-    await setTimeoutAsync(300);
-    const hash = await (await fetch('/${hashFile}?' + Date.now().toString())).text();
-    if (hash !== prevHash && prevHash !== null) {
-      console.log('Build hash changed, reloading...');
-      window.location.reload();
-    }
-    prevHash = hash;
-  }
-    `.trim();
-}
-
-export function AutoReloadScript({ hashFile }: { hashFile: string }) {
+export function AutoReloadScript() {
   return (
     <script
       type="module"
       dangerouslySetInnerHTML={{
-        __html: generateAutoReloadScript(hashFile),
+        __html: `
+        async function setTimeoutAsync(delay) {
+          return new Promise(resolve => setTimeout(resolve, delay));
+        }
+        let prevHash = null;
+        while (true) {
+          await setTimeoutAsync(300);
+          const hash = await (await fetch('/${HASH_FILE}?' + Date.now().toString())).text();
+          if (hash !== prevHash && prevHash !== null) {
+            console.log('Build hash changed, reloading...');
+            window.location.reload();
+          }
+          prevHash = hash;
+        }
+          `.trim(),
       }}
     ></script>
   );

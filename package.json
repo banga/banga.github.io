@@ -7,8 +7,8 @@
   "scripts": {
     "compile": "tsc --build",
     "build": "TZ=UTC node build/index.js",
-    "build:watch": "SHOULD_AUTO_RELOAD=1 ./node_modules/nodemon/bin/nodemon.js",
-    "draft:watch": "SHOULD_AUTO_RELOAD=1 POSTS_DIR=./drafts npm run build:watch",
+    "build:watch": "SHOULD_AUTO_RELOAD=1 BASE_URL=http://localhost:8080/ ./node_modules/nodemon/bin/nodemon.js",
+    "draft:watch": "POSTS_DIR=./drafts npm run build:watch",
     "serve": "npx http-server ./_site -c-1 -d false"
   },
   "nodemonConfig": {
