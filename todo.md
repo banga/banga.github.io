@@ -1,5 +1,6 @@
 [ ] Convenince to insert relative links to other posts reliably
 [ ] Add og images for home and blog feed pages
+[x] Auto reload pages in local development
 [x] RSS support
 [x] Handle footnotes
 [x] Generate page previews for social media

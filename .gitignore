@@ -3,3 +3,4 @@
 /node_modules
 /_site/index.html
 /_site/blog/
+/_site/.build-hash
