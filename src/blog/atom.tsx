@@ -51,6 +51,7 @@ export function renderAtomFeedForBlog({
   posts: BlogPostData[];
   buildContext: BuildContextType;
 }): string {
+  const blogUrl = new URL(BLOG_PATH, buildContext.baseUrl).toString();
   const atomFeedUrl = new URL(
     path.join(BLOG_PATH, ATOM_FILE_NAME),
     buildContext.baseUrl
@@ -65,7 +66,7 @@ export function renderAtomFeedForBlog({
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Shrey Banga's blog</title>
     <link href="${atomFeedUrl}" rel="self" />
-    <link href="${atomFeedUrl}" />
+    <link href="${blogUrl}" />
     <updated>${lastUpdated.toISOString()}</updated>
     <id>${atomFeedUrl}</id>
     <author>
