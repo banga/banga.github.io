@@ -2,9 +2,10 @@
 :root {
   --background-color: #15181a;
   --text-color: #e0e0e0;
-  --external-link-color: #fff;
-  --icon-fill-color: #fff;
   --link-color: #6cbaff;
+  --external-link-color: #fff;
+  --inline-code-color: #aaa;
+  --icon-fill-color: #fff;
   color-scheme: dark;
 
   --border-color: #878b995a;
@@ -15,9 +16,10 @@
   :root {
     --background-color: #fff;
     --text-color: #333;
-    --external-link-color: #111;
-    --icon-fill-color: #000;
     --link-color: #005cad;
+    --external-link-color: #111;
+    --inline-code-color: #888;
+    --icon-fill-color: #000;
     color-scheme: light;
   }
 }
@@ -207,6 +209,10 @@ pre {
   background: var(--code-block-color);
   border: 1px solid var(--code-block-color);
   padding: var(--spacing-size);
+}
+
+code {
+  color: var(--inline-code-color);
 }
 
 img {
