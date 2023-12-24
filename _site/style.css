@@ -179,6 +179,7 @@ body {
 a {
   text-decoration: none;
   color: var(--link-color);
+  word-wrap: break-word;
 }
 a[href^="http"] {
   text-decoration: underline;
