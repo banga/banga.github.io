@@ -60,7 +60,7 @@ export function renderAtomFeedForBlog({
   const entries = posts.map((post) => renderPostEntry({ post, buildContext }));
   const lastUpdated = posts
     .map((p) => p.createdDate)
-    .reduce((a, b) => (a > b ? a : b), posts[0]!.createdDate);
+    .reduce((a, b) => (a > b ? a : b), new Date(1970, 0, 1));
   return `
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
