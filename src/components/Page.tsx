@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactElement } from "react";
-import { BuildContext } from "./build_context.js";
-import { AutoReloadScript } from "../auto_reload.js";
+import { BuildContext } from "./BuildContext.js";
+import { AutoReloadScript } from "../lib/auto-reload.js";
 import { CSS_FILE_PATH } from "../consts.js";
 
 export function Page({

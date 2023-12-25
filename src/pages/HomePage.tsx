@@ -1,7 +1,7 @@
 import React from "react";
-import { Page } from "./Page.js";
-import { SocialIcons } from "./SocialIcons.js";
-import { BuildContext } from "./build_context.js";
+import { Page } from "../components/Page.js";
+import { SocialIcons } from "../components/SocialIcons.js";
+import { BuildContext } from "../components/BuildContext.js";
 
 function Home() {
   return (

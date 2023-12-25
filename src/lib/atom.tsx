@@ -1,9 +1,9 @@
-import { BlogPostData } from "./blog_post.js";
+import { BlogPostData } from "./read-blog-posts.js";
 import { renderToStaticMarkup } from "react-dom/server";
 import { encode } from "html-entities";
 import React from "react";
-import { BlogPostContent } from "../markdown/BlogPostContent.js";
-import { BuildContextType } from "../components/build_context.js";
+import { BlogPostContent } from "../components/markdown/BlogPostContent.js";
+import { BuildContextType } from "../components/BuildContext.js";
 import { ATOM_FILE_NAME, BLOG_PATH } from "../consts.js";
 import path from "node:path";
 

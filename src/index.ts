@@ -1,10 +1,10 @@
 import path from "node:path";
 import fs from "node:fs";
-import { buildAsync } from "./build.js";
+import { buildAsync } from "./lib/build.js";
 import {
   BuildContextType,
   DEFAULT_BUILD_CONTEXT,
-} from "./components/build_context.js";
+} from "./components/BuildContext.js";
 import { OUTPUT_DIR, CSS_FILE_PATH } from "./consts.js";
 
 function main() {

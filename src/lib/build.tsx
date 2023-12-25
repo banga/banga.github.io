@@ -1,22 +1,19 @@
 import React, { ReactElement } from "react";
 import path from "node:path";
-import {
-  BlogPostData,
-  readBlogPosts,
-  BlogPostOpenGraphImage,
-  BlogPost,
-} from "./blog/blog_post.js";
-import { HomePage } from "./components/HomePage.js";
-import { BlogFeed } from "./blog/feed.js";
+import { BlogPost } from "../pages/BlogPost.js";
+import { BlogPostData, readBlogPosts } from "./read-blog-posts.js";
+import { BlogPostOpenGraphImage } from "../components/opengraph/BlogPostOpenGraphImage.js";
+import { HomePage } from "../pages/HomePage.js";
+import { BlogFeed } from "../pages/BlogFeed.js";
 import { renderToStaticMarkup } from "react-dom/server";
-import { generateOpenGraphImageAsync } from "./opengraph/opengraph_image.js";
-import { renderAtomFeedForBlog } from "./blog/atom.js";
+import { generateOpenGraphImageAsync } from "./opengraph-image.js";
+import { renderAtomFeedForBlog } from "./atom.js";
 import assert from "node:assert";
-import { BuildContext, BuildContextType } from "./components/build_context.js";
-import { writeBuildHash } from "./auto_reload.js";
-import { writeFile } from "./write_file.js";
-import * as consts from "./consts.js";
-import { BLOG_PATH, OUTPUT_DIR } from "./consts.js";
+import { BuildContext, BuildContextType } from "../components/BuildContext.js";
+import { writeBuildHash } from "./auto-reload.js";
+import { writeFile } from "./write-file.js";
+import * as consts from "../consts.js";
+import { BLOG_PATH, OUTPUT_DIR } from "../consts.js";
 
 function renderElementToFile({
   element,

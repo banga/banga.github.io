@@ -3,8 +3,8 @@ import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { AutolinkedHeading } from "./autolinked_heading.js";
-import { SyntaxHighlightedCode } from "./syntax_highlighted_code.js";
+import { AutolinkedHeading } from "./AutolinkedHeading.js";
+import { SyntaxHighlightedCode } from "./SyntaxHighlightedCode.js";
 
 export function BlogPostContent({
   content,

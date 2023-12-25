@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { writeFile } from "./write_file.js";
+import { writeFile } from "./write-file.js";
 import React from "react";
-import { BuildContextType } from "./components/build_context.js";
-import { HASH_FILE, OUTPUT_DIR } from "./consts.js";
+import { BuildContextType } from "../components/BuildContext.js";
+import { HASH_FILE, OUTPUT_DIR } from "../consts.js";
 
 // Provides very basic auto-reloading such that when any output files change,
 // all html pages reload themselves. This works as follows:

@@ -2,9 +2,9 @@ import React, { ReactElement } from "react";
 import { Page } from "../components/Page.js";
 import { Header } from "../components/Header.js";
 import { Footer } from "../components/Footer.js";
-import { BlogPostData } from "./blog_post.js";
-import { renderDate } from "../date.js";
-import { BuildContext } from "../components/build_context.js";
+import { BlogPostData } from "../lib/read-blog-posts.js";
+import { renderDate } from "../lib/date.js";
+import { BuildContext } from "../components/BuildContext.js";
 import { BLOG_PATH } from "../consts.js";
 
 function PostPreview({ post }: { post: BlogPostData }): ReactElement {

@@ -1,15 +1,6 @@
-import React from "react";
-import { ReactElement } from "react";
 import fs from "node:fs";
 import path from "node:path";
-import { Header } from "../components/Header.js";
-import { Footer } from "../components/Footer.js";
-import { Page } from "../components/Page.js";
-import { fontFamily } from "../opengraph/opengraph_image.js";
-import { renderDate } from "../date.js";
-import { BlogPostContent } from "../markdown/BlogPostContent.js";
-import { BuildContext, BuildContextType } from "../components/build_context.js";
-import { BLOG_PATH } from "../consts.js";
+import { BuildContextType } from "../components/BuildContext.js";
 
 export type BlogPostData = {
   title: string;
@@ -102,83 +93,4 @@ export function readBlogPosts(buildContext: BuildContextType): BlogPostData[] {
   // Newest first. This matters when rendering the feed.
   posts.sort((a, b) => (a.createdDate < b.createdDate ? 1 : -1));
   return posts;
-}
-
-export function BlogPost({ post }: { post: BlogPostData }): ReactElement {
-  const postPath = path.join(BLOG_PATH, post.relativePath);
-  const ogImagePath = path.join(BLOG_PATH, post.relativeOpenGraphImagePath);
-
-  return (
-    <BuildContext.Consumer>
-      {({ baseUrl }) => (
-        <Page
-          title={post.title}
-          description={post.description}
-          canonicalUrl={new URL(postPath, baseUrl).toString()}
-          ogImageUrl={new URL(ogImagePath, baseUrl).toString()}
-          type="article"
-        >
-          <div className="m1 flex-col">
-            <Header />
-            <BlogPostContent
-              content={post.content}
-              autolinkHeadings={true}
-              absoluteUrls={false}
-            />
-            <Footer />
-          </div>
-        </Page>
-      )}
-    </BuildContext.Consumer>
-  );
-}
-
-export function BlogPostOpenGraphImage({
-  post,
-  baseUrl,
-}: {
-  post: BlogPostData;
-  baseUrl: string;
-}): ReactElement {
-  // TODO: Switch to CSS-in-JS so we can share styles here
-  // Copied from style.css
-  const backgroundColor = "#15181a";
-  const textColor = "#e0e0e0";
-  const linkColor = "#1e88e5";
-  const hostname = new URL(baseUrl).hostname;
-
-  return (
-    <div
-      style={{
-        fontFamily: fontFamily(400),
-        fontSize: 24,
-        display: "flex",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor,
-        color: textColor,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          margin: "60px",
-          lineHeight: 1.5,
-        }}
-      >
-        <div style={{ fontFamily: fontFamily(600), fontSize: 32 }}>
-          {post.title}
-        </div>
-        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <div style={{ color: linkColor }}>{hostname}</div>•
-          <div>{renderDate(post.createdDate)}</div>
-        </div>
-      </div>
-    </div>
-  );
 }
