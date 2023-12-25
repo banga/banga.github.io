@@ -60,12 +60,17 @@ export function AutoReloadScript() {
         let prevHash = null;
         while (true) {
           await setTimeoutAsync(300);
-          const hash = await (await fetch('/${HASH_FILE}?' + Date.now().toString())).text();
-          if (hash !== prevHash && prevHash !== null) {
-            console.log('Build hash changed, reloading...');
-            window.location.reload();
+          const response = await fetch('/${HASH_FILE}?' + Date.now().toString());
+          if (response.ok) {
+            const hash = await response.text();
+            if (hash !== prevHash && prevHash !== null) {
+              console.log('Build hash changed, reloading...');
+              window.location.reload();
+            }
+            prevHash = hash;
+          } else {
+            console.warn('Error fetching ${HASH_FILE}:', response.statusText);
           }
-          prevHash = hash;
         }
           `.trim(),
       }}

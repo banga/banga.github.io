@@ -1,6 +1,4 @@
 .DS_Store
 /build
 /node_modules
-/_site/index.html
-/_site/blog/
-/_site/.build-hash
+/_site/

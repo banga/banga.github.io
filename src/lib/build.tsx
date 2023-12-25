@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import path from "node:path";
+import fs from "node:fs";
 import { BlogPost } from "../pages/BlogPost.js";
 import { BlogPostData, readBlogPosts } from "./read-blog-posts.js";
 import { BlogPostOpenGraphImage } from "../components/opengraph/BlogPostOpenGraphImage.js";
@@ -13,7 +14,7 @@ import { BuildContext, BuildContextType } from "../components/BuildContext.js";
 import { writeBuildHash } from "./auto-reload.js";
 import { writeFile } from "./write-file.js";
 import * as consts from "../consts.js";
-import { BLOG_PATH, OUTPUT_DIR } from "../consts.js";
+import { ASSETS_DIR, BLOG_PATH, CSS_FILE_PATH, OUTPUT_DIR } from "../consts.js";
 
 function renderElementToFile({
   element,
@@ -92,10 +93,29 @@ function writeHomepage(buildContext: BuildContextType) {
   });
 }
 
+function copyCSS() {
+  writeFile(
+    path.join(OUTPUT_DIR, CSS_FILE_PATH),
+    fs.readFileSync(CSS_FILE_PATH)
+  );
+}
+
+function copyAssets() {
+  const targetDir = path.join(OUTPUT_DIR, ASSETS_DIR);
+  console.log(`Copying ${ASSETS_DIR} to ${targetDir}`);
+  fs.cpSync(ASSETS_DIR, targetDir, {
+    recursive: true,
+  });
+}
+
 export async function buildAsync(buildContext: BuildContextType) {
   assert.equal(new Date().getTimezoneOffset(), 0, `Time-zone should be UTC`);
 
   console.log({ consts, buildContext });
+
+  copyCSS();
+
+  copyAssets();
 
   const posts = readBlogPosts(buildContext);
 
