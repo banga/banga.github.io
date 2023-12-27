@@ -28,15 +28,16 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.16",
     "@resvg/resvg-js": "^2.6.0",
+    "hast-util-to-jsx-runtime": "^2.3.0",
     "html-entities": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
-    "react-syntax-highlighter": "^15.5.0",
     "rehype-katex": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "satori": "^0.10.11",
+    "shikiji": "^0.9.12",
     "typescript": "^5.3.3"
   }
 }

@@ -1,7 +1,23 @@
 import React from "react";
-import { Prism } from "react-syntax-highlighter";
-// @ts-expect-error: types are wrong
-import codeStyle from "react-syntax-highlighter/dist/cjs/styles/prism/vsc-dark-plus.js";
+import { getHighlighter, BundledLanguage } from "shikiji";
+import { toJsxRuntime } from "hast-util-to-jsx-runtime";
+
+const langs: BundledLanguage[] = [
+  "bash",
+  "js",
+  "json",
+  "md",
+  "ts",
+  "tsx",
+  "rs",
+  "rust",
+  "markdown",
+];
+
+const highlighter = await getHighlighter({
+  themes: ["github-dark", "vitesse-light"],
+  langs,
+});
 
 export function SyntaxHighlightedCode(
   props: React.DetailedHTMLProps<
@@ -15,9 +31,12 @@ export function SyntaxHighlightedCode(
   const [_, language = ""] = /language-(\w+)/.exec(className) ?? [];
 
   if (
-    !Prism.supportedLanguages.includes(language) ||
+    !langs.includes(language as BundledLanguage) ||
     typeof children !== "string"
   ) {
+    if (language) {
+      console.warn(`Could not render code block with language="${language}"`);
+    }
     return (
       <code {...rest} className={className}>
         {children}
@@ -25,25 +44,20 @@ export function SyntaxHighlightedCode(
     );
   }
 
-  return (
-    <Prism
-      children={children}
-      language={language}
-      style={codeStyle.default}
-      // The node we get here is already wrapped in a `pre` tag, so
-      // we replace it with a `div` here to avoid having nested
-      // `pre` tags
-      PreTag={"div"}
-      // Reset a bunch of styles that Prism injects here so we can
-      // style it from CSS
-      customStyle={{
-        padding: 0,
-        margin: 0,
-        fontFamily: undefined,
-        fontSize: undefined,
-        background: undefined,
-      }}
-      {...rest}
-    />
-  );
+  const hastRoot = highlighter.codeToHast(children, {
+    lang: language,
+    themes: {
+      light: "vitesse-light",
+      dark: "github-dark",
+    },
+    defaultColor: false,
+  });
+
+  // TODO: Slightly annoying that this will render a <pre> tag when we are
+  // replacing a <code> tag
+  return toJsxRuntime(hastRoot, {
+    Fragment: React.Fragment,
+    jsx: (type, props) => React.createElement(type as string, props),
+    jsxs: (type, props) => React.createElement(type as string, props),
+  });
 }
