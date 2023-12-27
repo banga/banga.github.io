@@ -2,6 +2,7 @@ import React from "react";
 import { Page } from "../components/Page.js";
 import { SocialIcons } from "../components/SocialIcons.js";
 import { BuildContext } from "../components/BuildContext.js";
+import { RESUME_PATH } from "../consts.js";
 
 function Home() {
   return (
@@ -20,7 +21,8 @@ function Home() {
           <a href="https://www.quip.com">Quip</a>,{" "}
           <a href="https://www.quora.com">Quora</a>,{" "}
           <a href="https://www.google.com">Google</a> and{" "}
-          <a href="https://www.adobe.com">Adobe</a>.
+          <a href="https://www.adobe.com">Adobe</a>. A detailed résumé can be
+          found <a href={RESUME_PATH}>here</a>.
         </div>
         <div className="m1">
           My other work can be found on my{" "}
