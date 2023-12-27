@@ -55,7 +55,9 @@ async function writeBlogPostOpenGraphImagesAsync(
 
       const imageBuffer = await generateOpenGraphImageAsync(
         // Can't use context provider here because `satori` can't handle it
-        <BlogPostOpenGraphImage post={post} baseUrl={buildContext.baseUrl} />
+        <BlogPostOpenGraphImage post={post} baseUrl={buildContext.baseUrl} />,
+        1200,
+        600
       );
       writeFile(openGraphImageOutputPath, imageBuffer);
     })

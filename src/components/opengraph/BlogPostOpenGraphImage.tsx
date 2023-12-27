@@ -22,33 +22,39 @@ export function BlogPostOpenGraphImage({
     <div
       style={{
         fontFamily: fontFamily(400),
-        fontSize: 24,
         display: "flex",
         width: "100%",
         height: "100%",
         flexDirection: "column",
         flexWrap: "wrap",
-        alignItems: "center",
         justifyContent: "center",
         backgroundColor,
         color: textColor,
+        padding: "50px 100px",
+        lineHeight: 1.5,
+        gap: "15px",
       }}
     >
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          margin: "60px",
-          lineHeight: 1.5,
+          flexDirection: "row",
+          fontFamily: fontFamily(600),
+          fontSize: 64,
         }}
       >
-        <div style={{ fontFamily: fontFamily(600), fontSize: 32 }}>
-          {post.title}
-        </div>
-        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <div style={{ color: linkColor }}>{hostname}</div>•
-          <div>{renderDate(post.createdDate)}</div>
-        </div>
+        {post.title}
+      </div>
+      <div
+        style={{
+          fontSize: 32,
+          display: "flex",
+          flexDirection: "row",
+          gap: "15px",
+        }}
+      >
+        <div style={{ color: linkColor }}>{hostname}</div>•
+        <div>{renderDate(post.createdDate)}</div>
       </div>
     </div>
   );

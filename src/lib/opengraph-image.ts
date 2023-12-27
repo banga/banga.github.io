@@ -23,13 +23,11 @@ export function fontFamily(weight: (typeof FONT_WEIGHTS)[number]): string {
 }
 
 export async function generateOpenGraphImageAsync(
-  element: ReactElement
+  element: ReactElement,
+  width: number,
+  height: number
 ): Promise<Buffer> {
-  const svg = await satori(element, {
-    width: 800,
-    height: 400,
-    fonts: FONTS,
-  });
+  const svg = await satori(element, { width, height, fonts: FONTS });
   const resvg = new Resvg(svg, {
     fitTo: { mode: "original" },
     font: { loadSystemFonts: false },
