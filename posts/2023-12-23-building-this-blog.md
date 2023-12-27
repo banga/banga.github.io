@@ -86,6 +86,8 @@ Later, when I was [generating a blog feed](#generating-a-blog-feed), I noticed t
 
 I shared a few code snippets before, which were highlighted by Jekyll by default using [Pygments](https://pygments.org/). I wanted to improve on that by rendering it in VS Code's dark theme, having written a [tool to do the same on the terminal](https://github.com/banga/git-split-diffs?tab=readme-ov-file#git-split-diffs). I used [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter), which delegates to [Prism](https://prismjs.com/). It's not identical, but it ships with a theme called `vsc-dark-plus` that replicates VS Code's `Dark+` theme. Loading this theme was a bit of a pain in my node ESM setup, partly because the types shipped with react-syntax-highlighter are [wrong](https://arethetypeswrong.github.io/?p=react-syntax-highlighter%4015.5.0), but it worked fine after that.
 
+**Edit**: I have since [replaced](https://github.com/banga/banga.github.io/commit/42abb7c81502b9227223ca63577ce17816c3ffe5) `react-syntax-highlighter` with [shikiji](https://shikiji.netlify.app/), which renders accurate VS Code themes.
+
 ### Rendering footnotes
 
 My last post really went all out on all the github extensions it could use, which included footnotes. Thankfully, these were easy to support, via the [remark-gfm](https://github.com/remarkjs/remark-gfm) plugin. It actually pulls in a number of features from [GitHub Flavored Markdown](https://github.github.com/gfm/) apart from footnotes, such as strikethroughs, tables and task lists. These will come in handy in the future.
