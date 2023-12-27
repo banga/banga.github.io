@@ -14,13 +14,7 @@ import { BuildContext, BuildContextType } from "../components/BuildContext.js";
 import { writeBuildHash } from "./auto-reload.js";
 import { writeFile } from "./write-file.js";
 import * as consts from "../consts.js";
-import {
-  ASSETS_DIR,
-  BLOG_PATH,
-  CSS_FILE_PATH,
-  OUTPUT_DIR,
-  RESUME_PATH,
-} from "../consts.js";
+import { STATIC_DIR, BLOG_PATH, OUTPUT_DIR, RESUME_PATH } from "../consts.js";
 import { ResumePage } from "../pages/ResumePage.js";
 
 function renderElementToFile({
@@ -111,19 +105,8 @@ function writeResume(buildContext: BuildContextType) {
   });
 }
 
-function copyCSS() {
-  writeFile(
-    path.join(OUTPUT_DIR, CSS_FILE_PATH),
-    fs.readFileSync(CSS_FILE_PATH)
-  );
-}
-
-function copyAssets() {
-  const targetDir = path.join(OUTPUT_DIR, ASSETS_DIR);
-  console.log(`Copying ${ASSETS_DIR} to ${targetDir}`);
-  fs.cpSync(ASSETS_DIR, targetDir, {
-    recursive: true,
-  });
+function copyStaticFiles() {
+  fs.cpSync(STATIC_DIR, OUTPUT_DIR, { recursive: true });
 }
 
 export async function buildAsync(buildContext: BuildContextType) {
@@ -131,9 +114,7 @@ export async function buildAsync(buildContext: BuildContextType) {
 
   console.log({ consts, buildContext });
 
-  copyCSS();
-
-  copyAssets();
+  copyStaticFiles();
 
   const posts = readBlogPosts(buildContext);
 
