@@ -14,7 +14,14 @@ import { BuildContext, BuildContextType } from "../components/BuildContext.js";
 import { writeBuildHash } from "./auto-reload.js";
 import { writeFile } from "./write-file.js";
 import * as consts from "../consts.js";
-import { ASSETS_DIR, BLOG_PATH, CSS_FILE_PATH, OUTPUT_DIR } from "../consts.js";
+import {
+  ASSETS_DIR,
+  BLOG_PATH,
+  CSS_FILE_PATH,
+  OUTPUT_DIR,
+  RESUME_PATH,
+} from "../consts.js";
+import { ResumePage } from "../pages/ResumePage.js";
 
 function renderElementToFile({
   element,
@@ -95,6 +102,15 @@ function writeHomepage(buildContext: BuildContextType) {
   });
 }
 
+function writeResume(buildContext: BuildContextType) {
+  const outputPath = path.join(OUTPUT_DIR, RESUME_PATH, "index.html");
+  renderElementToFile({
+    element: <ResumePage />,
+    outputPath,
+    buildContext,
+  });
+}
+
 function copyCSS() {
   writeFile(
     path.join(OUTPUT_DIR, CSS_FILE_PATH),
@@ -122,6 +138,8 @@ export async function buildAsync(buildContext: BuildContextType) {
   const posts = readBlogPosts(buildContext);
 
   await writeBlogAsync(buildContext, posts);
+
+  writeResume(buildContext);
 
   writeHomepage(buildContext);
 

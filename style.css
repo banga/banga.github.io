@@ -2,6 +2,7 @@
 :root {
   --background-color: #15181a;
   --text-color: #e0e0e0;
+  --text-dim-color: #a0a0a0;
   --link-color: #6cbaff;
   --external-link-color: #fff;
   --inline-code-color: #aaa;
@@ -20,6 +21,7 @@
   :root {
     --background-color: #fff;
     --text-color: #333;
+    --text-dim-color: #666;
     --link-color: #005cad;
     --external-link-color: #111;
     --inline-code-color: #888;
@@ -52,14 +54,29 @@
 .font-large {
   font-size: calc(var(--font-size) * 1.5);
 }
+.font-medium {
+  font-size: var(--font-size);
+}
 .font-small {
+  font-size: calc(var(--font-size) * 0.9);
+}
+.font-x-small {
   font-size: calc(var(--font-size) * 0.8);
 }
 .bold {
   font-weight: 600;
 }
-.light {
+.thin {
   font-weight: 300;
+}
+.regular {
+  font-weight: 400;
+}
+.italics {
+  font-style: italic;
+}
+.dim {
+  color: var(--text-dim-color);
 }
 
 /* Spacing */
@@ -115,6 +132,9 @@
 .flex-col {
   display: flex;
   flex-direction: column;
+}
+.flex-0 {
+  flex: 0 0;
 }
 .space-between {
   justify-content: space-between;
@@ -236,6 +256,10 @@ img {
 .photo {
   width: var(--photo-size);
   height: var(--photo-size);
+}
+.photo-small {
+  width: calc(var(--photo-size) * 0.5);
+  height: calc(var(--photo-size) * 0.5);
 }
 
 svg.icon {

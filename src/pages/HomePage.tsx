@@ -12,7 +12,7 @@ function Home() {
       <div className="flex-col">
         <div className="m1">
           <div className="font-large bold">Shrey Banga</div>
-          <div className="light">banga.shrey@gmail.com</div>
+          <div className="dim">banga.shrey@gmail.com</div>
         </div>
         <div className="m1">
           I have worked as a Software Engineer at{" "}

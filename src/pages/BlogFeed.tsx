@@ -29,7 +29,7 @@ export function BlogFeed({ posts }: { posts: BlogPostData[] }): ReactElement {
           type="website"
         >
           <div className="flex-col m1">
-            <Header />
+            <Header pathName={BLOG_PATH} />
             {posts.map((post, i) => (
               <PostPreview post={post} key={i} />
             ))}

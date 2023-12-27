@@ -24,7 +24,7 @@ export function BlogPost({ post }: { post: BlogPostData }): ReactElement {
           type="article"
         >
           <div className="m1 flex-col">
-            <Header />
+            <Header pathName={BLOG_PATH} />
             <BlogPostContent
               content={post.content}
               autolinkHeadings={true}
