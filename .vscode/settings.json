@@ -1,19 +1,28 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#2f7c47",
-        "activityBar.activeBorder": "#422c74",
-        "activityBar.foreground": "#e7e7e7",
-        "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#422c74",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "titleBar.activeBackground": "#215732",
-        "titleBar.inactiveBackground": "#21573299",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveForeground": "#e7e7e799",
-        "activityBar.activeBackground": "#2f7c47",
-        "commandCenter.border": "#e7e7e799",
-        "sash.hoverBorder": "#2f7c47"
-    },
-    "peacock.color": "#215732",
-    "editor.formatOnSave": true
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#2f7c47",
+    "activityBar.activeBorder": "#422c74",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#422c74",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "titleBar.activeBackground": "#215732",
+    "titleBar.inactiveBackground": "#21573299",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "activityBar.activeBackground": "#2f7c47",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#2f7c47"
+  },
+  "peacock.color": "#215732",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "Airtable",
+    "Automations",
+    "codemod",
+    "Quora",
+    "résumé",
+    "Roorkee",
+    "triaging"
+  ]
 }

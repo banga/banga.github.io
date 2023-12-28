@@ -89,18 +89,18 @@ function Work() {
           optimizations to improve base health and performance.
         </WorkItem>
         <WorkItem date="2020 — 2021" subtitle="Platform">
-          Helped build{" "}
+          Helped launch{" "}
           <a href="https://www.airtable.com/platform/automations">
             Automations
           </a>
-          . Built end-to-end several of the most popular triggers and actions.
-          Built a type checker that drives autocompletion and validation in
-          inputs. Added support for multiple actions, rich-text and attachments
-          in emails, finding records and sending them in emails. Built recipes
+          . Built several of the most popular triggers and actions working
+          across the stack. Built a type checker that drives autocompletion and
+          validation in inputs. Added multi-action automations, support for
+          rich-text, attachments and sending records in emails. Built recipes
           and walkthroughs to increase adoption.
           <br />
           <br />
-          Helped build the{" "}
+          Helped launch the{" "}
           <a href="https://www.airtable.com/newsroom/product-and-technology/introducing-scripting-block">
             Scripting Block
           </a>
@@ -114,9 +114,8 @@ function Work() {
           etc.
         </WorkItem>
         <WorkItem date="2023" subtitle="Recruiting">
-          Surveyed interviewers to identify top areas of improvement. Led
-          efforts to standardize debriefs and to periodically refresh
-          interviewer calibration.
+          Surveyed interviewers to identify top pain points. Led efforts to
+          standardize debriefs and periodically refresh interviewer calibration.
         </WorkItem>
       </Employer>
       <Employer name="Quip" title="Staff Software Engineer">
