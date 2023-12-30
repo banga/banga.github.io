@@ -8,7 +8,8 @@ export function Header({ pathName }: { pathName: string }) {
     <BuildContext.Consumer>
       {({ baseUrl }) => (
         <div>
-          <a href="/">{new URL(baseUrl).hostname}</a> /{" "}
+          <a href="/">{new URL(baseUrl).hostname}</a>
+          <span className="dim"> / </span>
           <a href={pathName}>{title}</a>
         </div>
       )}
