@@ -57,6 +57,7 @@ function readBlogPost(filePath: string): BlogPostData {
   const outputFileName = result.groups["name"]! + ".html";
 
   const relativePath = path.join(
+    "/",
     createdYear,
     createdMonth,
     createdDay,

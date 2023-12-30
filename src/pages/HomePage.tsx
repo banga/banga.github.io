@@ -3,6 +3,7 @@ import { Page } from "../components/Page.js";
 import { SocialIcons } from "../components/SocialIcons.js";
 import { BuildContext } from "../components/BuildContext.js";
 import { BLOG_PATH, RESUME_PATH } from "../consts.js";
+import { Link } from "../components/Link.js";
 
 function Home() {
   const separator = <> · </>;
@@ -18,16 +19,16 @@ function Home() {
         </div>
         <div className="m1">
           Full-stack software engineer in the DC area. Previously worked at{" "}
-          <a href="https://www.airtable.com">Airtable</a>,{" "}
-          <a href="https://www.quip.com">Quip</a>,{" "}
-          <a href="https://www.quora.com">Quora</a>,{" "}
-          <a href="https://www.google.com">Google</a> and{" "}
-          <a href="https://www.adobe.com">Adobe</a>.
+          <Link href="https://www.airtable.com">Airtable</Link>,{" "}
+          <Link href="https://www.quip.com">Quip</Link>,{" "}
+          <Link href="https://www.quora.com">Quora</Link>,{" "}
+          <Link href="https://www.google.com">Google</Link> and{" "}
+          <Link href="https://www.adobe.com">Adobe</Link>.
         </div>
         <div className="m1">
-          <a href={RESUME_PATH}>résumé</a>
+          <Link href={RESUME_PATH}>résumé</Link>
           {separator}
-          <a href={BLOG_PATH}>blog</a>
+          <Link href={BLOG_PATH}>blog</Link>
         </div>
         <div className="m1">
           <SocialIcons />

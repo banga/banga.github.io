@@ -4,28 +4,33 @@ import { Mastodon } from "./icons/mastodon.js";
 import React from "react";
 import { Atom } from "./icons/atom.js";
 import { GitHub } from "./icons/github.js";
+import { Link } from "./Link.js";
 
 export function SocialIcons() {
   return (
     <div className="flex-row gap-1">
-      <a href="/blog/atom.xml" title="Atom feed">
+      <Link href="/blog/atom.xml" title="Atom feed">
         <Atom />
-      </a>
-      <a href="https://www.github.com/banga" title="GitHub profile">
+      </Link>
+      <Link href="https://www.github.com/banga" title="GitHub profile">
         <GitHub />
-      </a>
-      <a
+      </Link>
+      <Link
         href="https://www.linkedin.com/in/shrey-banga"
         title="LinkedIn profile"
       >
         <LinkedIn />
-      </a>
-      <a href="https://twitter.com/banga_shrey" title="Twitter profile">
+      </Link>
+      <Link href="https://twitter.com/banga_shrey" title="Twitter profile">
         <Twitter />
-      </a>
-      <a rel="me" href="https://hachyderm.io/@shrey" title="Mastodon profile">
+      </Link>
+      <Link
+        rel="me"
+        href="https://hachyderm.io/@shrey"
+        title="Mastodon profile"
+      >
         <Mastodon />
-      </a>
+      </Link>
     </div>
   );
 }

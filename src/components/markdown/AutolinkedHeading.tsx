@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "../Link.js";
 
 export function AutolinkedHeading(
   props: React.DetailedHTMLProps<
@@ -19,7 +20,7 @@ export function AutolinkedHeading(
   return React.createElement(node.tagName, {
     className: "flex-row align-baseline relative",
     children: [
-      <a
+      <Link
         className="permalink absolute"
         id={anchorId}
         href={`#${anchorId}`}
@@ -27,7 +28,7 @@ export function AutolinkedHeading(
         style={{ left: "-1.2rem" }}
       >
         #
-      </a>,
+      </Link>,
       children,
     ],
     ...rest,

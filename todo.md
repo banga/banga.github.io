@@ -1,11 +1,12 @@
 - [ ] Projects page
   - [x] Add skeleton
-  - [ ] Fill out projects
+  - [x] Fill out projects
+  - [ ] Fill out interesting projects from work
   - [ ] Link from home page and résumé
-- [ ] Link management
-  - [ ] Add relative links reliably
-  - [ ] Detect broken links
-  - [ ] External links with the proper attributes
+- [x] Link management
+  - [x] Detect broken links
+  - [x] External links with the proper attributes
+  - [x] Detect broken relative links
 - [ ] Add og images for home and blog feed pages
 - [x] Add robots.txt
 - [x] Add resume

@@ -3,6 +3,7 @@ import { Page } from "../components/Page.js";
 import { BuildContext } from "../components/BuildContext.js";
 import { RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
+import { Link } from "../components/Link.js";
 
 function Heading() {
   return (
@@ -81,18 +82,18 @@ function Work() {
         <WorkItem date="2021 — 2022" subtitle="Performance & Architecture">
           Helped launch <i>view projection</i>, which dramatically improved load
           times of our largest bases, including solving the{" "}
-          <a href="https://medium.com/airtable-eng/the-curious-case-of-the-missing-cell-8ff47d745de7">
+          <Link href="https://medium.com/airtable-eng/the-curious-case-of-the-missing-cell-8ff47d745de7">
             curious case of the missing cell
-          </a>
+          </Link>
           . Built backend for a new UI to show previews of large views and
           optimize them for view projection. Implemented several other
           optimizations to improve base health and performance.
         </WorkItem>
         <WorkItem date="2020 — 2021" subtitle="Platform">
           Helped launch{" "}
-          <a href="https://www.airtable.com/platform/automations">
+          <Link href="https://www.airtable.com/platform/automations">
             Automations
-          </a>
+          </Link>
           . Built several of the most popular triggers and actions working
           across the stack. Built a type checker that drives autocompletion and
           validation in inputs. Added multi-action automations, support for
@@ -101,9 +102,9 @@ function Work() {
           <br />
           <br />
           Helped launch the{" "}
-          <a href="https://www.airtable.com/newsroom/product-and-technology/introducing-scripting-block">
+          <Link href="https://www.airtable.com/newsroom/product-and-technology/introducing-scripting-block">
             Scripting Block
-          </a>
+          </Link>
           . Worked on the editor, autocomplete and several API endpoints.
         </WorkItem>
         <WorkItem date="2020 — 2023" subtitle="Tools">
@@ -121,18 +122,18 @@ function Work() {
       <Employer name="Quip" title="Staff Software Engineer">
         <WorkItem date="2019" subtitle="Client Infra">
           Worked with three highly tenured engineers to{" "}
-          <a href="https://quip.com/blog/the-road-to-typescript-at-quip-part-one">
+          <Link href="https://quip.com/blog/the-road-to-typescript-at-quip-part-one">
             migrate
-          </a>{" "}
+          </Link>{" "}
           the codebase to TypeScript.
         </WorkItem>
         <WorkItem date="2018 — 2019" subtitle="Documents">
           Tech led the Documents team. Designed a new cross-platform caret &
           selection API to improve the editor's reliability and extensibility.
           We shipped Document History, Font Colors,{" "}
-          <a href="https://quip.com/blog/sync-content-with-Live-Paste">
+          <Link href="https://quip.com/blog/sync-content-with-Live-Paste">
             Live Paste
-          </a>
+          </Link>
           , Find-and-Replace, Custom List Numbering, Drag-n-drop list items,
           paste from markdown etc.
         </WorkItem>
@@ -154,7 +155,9 @@ function Work() {
       </Employer>
       <Employer name="Quora" title="Software Engineer">
         <WorkItem date="2014 — 2016" subtitle="Platform">
-          <a href="https://quorablog.quora.com/A-New-Quora-Editor">Rebuilt</a>{" "}
+          <Link href="https://quorablog.quora.com/A-New-Quora-Editor">
+            Rebuilt
+          </Link>{" "}
           the rich text editor from the ground up, which obsoleted numerous bugs
           and allowed us to support several new features, such as inline math
           previews.
@@ -166,9 +169,9 @@ function Work() {
         </WorkItem>
         <WorkItem date="2013 — 2014">
           Built{" "}
-          <a href="https://quorablog.quora.com/A-New-Way-to-Browse-Your-Own-Content">
+          <Link href="https://quorablog.quora.com/A-New-Way-to-Browse-Your-Own-Content">
             Your Content
-          </a>
+          </Link>
           . Re-designed the feature gating abstraction. Led the code quality
           group. Built speed measurement tools. Ran growth experiments.
         </WorkItem>

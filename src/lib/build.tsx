@@ -23,6 +23,7 @@ import {
 } from "../consts.js";
 import { ResumePage } from "../pages/ResumePage.js";
 import { ProjectsPage } from "../pages/ProjectsPage.js";
+import { verifyLinkedRelativePathsExist } from "../components/Link.js";
 
 function renderElementToFile({
   element,
@@ -122,4 +123,6 @@ export async function buildAsync(buildContext: BuildContextType) {
   writePage(buildContext, "/", <HomePage />);
 
   writeBuildHash(buildContext);
+
+  verifyLinkedRelativePathsExist();
 }

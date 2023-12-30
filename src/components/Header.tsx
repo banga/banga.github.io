@@ -1,5 +1,6 @@
 import React from "react";
 import { BuildContext } from "./BuildContext.js";
+import { Link } from "./Link.js";
 
 export function Header({ pathName }: { pathName: string }) {
   // Remove leading and trailing slashes
@@ -8,9 +9,9 @@ export function Header({ pathName }: { pathName: string }) {
     <BuildContext.Consumer>
       {({ baseUrl }) => (
         <div>
-          <a href="/">{new URL(baseUrl).hostname}</a>
+          <Link href="/">{new URL(baseUrl).hostname}</Link>
           <span className="dim"> / </span>
-          <a href={pathName}>{title}</a>
+          <Link href={pathName}>{title}</Link>
         </div>
       )}
     </BuildContext.Consumer>

@@ -6,12 +6,14 @@ import { BlogPostData } from "../lib/read-blog-posts.js";
 import { renderDate } from "../lib/date.js";
 import { BuildContext } from "../components/BuildContext.js";
 import { BLOG_PATH } from "../consts.js";
+import { Link } from "../components/Link.js";
+import path from "node:path";
 
 function PostPreview({ post }: { post: BlogPostData }): ReactElement {
   return (
     <div className="mt1 pb1">
       <div>
-        <a href={post.relativePath}>{post.title}</a>
+        <Link href={path.join(BLOG_PATH, post.relativePath)}>{post.title}</Link>
       </div>
       <div className="font-small">{renderDate(post.createdDate)}</div>
     </div>
