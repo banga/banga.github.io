@@ -83,6 +83,9 @@
 .dim {
   color: var(--text-dim-color);
 }
+.lowercase {
+  text-transform: lowercase;
+}
 
 /* Spacing */
 .m0 {
@@ -200,6 +203,11 @@
 .circle {
   border-radius: 50%;
   border: 2px solid var(--text-color);
+}
+.button {
+  border-radius: 4px;
+  padding: 0 4px;
+  background: var(--border-color);
 }
 
 body {

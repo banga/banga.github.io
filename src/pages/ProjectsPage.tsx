@@ -33,9 +33,11 @@ function ProjectDetails({
   technologies: string[];
 }) {
   return (
-    <div className="flex-row gap-half">
+    <div className="flex-row gap-half lowercase">
       {technologies.map((name, i) => (
-        <code key={i}>{name}</code>
+        <code className="button" key={i}>
+          {name}
+        </code>
       ))}
       {stars > 1000 && (
         <div className="font-x-small dim">
@@ -52,14 +54,14 @@ function Project({
   url,
   date,
   stars = 0,
-  technologies = [],
+  technologies,
   children,
 }: {
   name: string;
   date: string;
   stars?: number;
   url?: string;
-  technologies?: string[];
+  technologies: string[];
   children?: ReactNode;
 }) {
   return (
@@ -99,7 +101,7 @@ export function ProjectsPage() {
                 date="2021"
                 stars={2496}
                 url="https://github.com/banga/git-split-diffs"
-                technologies={["typescript", "node"]}
+                technologies={["TypeScript", "node"]}
               >
                 A tool to display git diffs with syntax highlighting in a
                 side-by-side view:
@@ -117,7 +119,7 @@ export function ProjectsPage() {
                 url="https://github.com/b-ryan/powerline-shell"
                 date="2013"
                 stars={6200}
-                technologies={["python", "shell"]}
+                technologies={["Python", "shell"]}
               >
                 A highly customizable shell prompt:
                 <Screenshot url="https://raw.githubusercontent.com/banga/powerline-shell/master/bash-powerline-screenshot.png" />
@@ -141,7 +143,7 @@ export function ProjectsPage() {
                 name="craytracer"
                 url="https://github.com/banga/craytracer"
                 date="2023"
-                technologies={["rust"]}
+                technologies={["Rust"]}
               >
                 A hobby raytracer in rust:
                 <Screenshot url="https://github.com/banga/craytracer/blob/master/images/dragon.png?raw=true" />
@@ -160,6 +162,7 @@ export function ProjectsPage() {
                 name="prefactor"
                 date="2017"
                 url="https://github.com/banga/prefactor"
+                technologies={["Python"]}
               >
                 A tool for writing AST-based refactorings for large Python
                 codebases. While working on Quip's large Python codebase, which
@@ -174,11 +177,16 @@ export function ProjectsPage() {
                 It uses the <code>lib2to3</code> library to convert between an
                 AST and code, which preserves comments and whitespace much
                 better than the <code>ast</code> module.
+                <br />
+                <br />I wrote a similar tool for TypeScript{" "}
+                <a href="https://github.com/banga/ts-transform/">here</a>, which
+                I used at Airtable to safely remove some deprecated functions.
               </Project>
               <Project
                 name="Gmail multi-account mail checker"
-                date="TODO"
+                date="2013"
                 url="https://github.com/banga/Gmail-Extension--Multiple-Accounts"
+                technologies={["JavaScript"]}
               >
                 A Chrome extension that expanded on the{" "}
                 <a href="https://chromewebstore.google.com/detail/google-mail-checker/mihcahmgecmbnbcchbopgniflfhgnkff">
@@ -193,30 +201,74 @@ export function ProjectsPage() {
               </Project>
               <Project
                 name="DownloadAccelerator"
-                date="TODO"
+                date="2011"
                 url="https://github.com/banga/DownloadAccelerator"
-              />
-              <Project
-                name="Intel 8085A emulator"
-                date="TODO"
-                url="https://github.com/banga/Emulator"
-              />
+                technologies={["Android", "Java"]}
+              >
+                In the early days of the internet, "download accelerators" were
+                popular tools to help you speed up downloads of large files.
+                These worked if the source limited outgoing bandwidth per
+                connection, but supported{" "}
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests"
+                  target="_blank"
+                >
+                  Range requests
+                </a>
+                . If so, the accelerator would split up the byte range of the
+                requested file into chunks, establish a connection per chunk and
+                then combine the chunks when downloaded. I wrote an Android app
+                that did the same thing. I wrote it partly to learn the
+                platform, but got a few paying users too.
+              </Project>
               <Project
                 name="miniJava compiler"
-                date="TODO"
+                date="2012"
                 url="https://github.com/banga/miniJava-compiler"
-              />
+                technologies={["Java"]}
+              >
+                A compiler for a subset of Java, for the{" "}
+                <a href="https://www.cs.unc.edu/~prins/Classes/520/">
+                  COMP 520
+                </a>{" "}
+                class at UNC. I had a lot of fun writing this and trying to
+                maximize the points we got on the assignment by adding more
+                features like function overloading and making it more reliable
+                by writing a fuzzer. I was told by the professor that it was one
+                of the best performing compilers he had seen in this class.
+              </Project>
               <Project
                 name="shreyb.dev"
-                date="TODO"
+                date="2023"
                 url="https://github.com/banga/banga.github.io"
-              />
+                technologies={["React", "node"]}
+              >
+                This very website. I wrote all about it in{" "}
+                <a href="/blog/2023/12/23/building-this-blog.html">this</a> blog
+                post, but I essentially wrote my own static site generator that
+                deploys builds and deploys this site to GitHub pages on every
+                push.
+              </Project>
               <Project
                 name="GitHub PR Extension"
-                date="TODO"
+                date="2022"
                 url="https://github.com/banga/github-pr-extension"
-              />
+                technologies={["JavaScript"]}
+              >
+                Fills in a gap in the GitHub UI of adding keyboard shortcuts for
+                navigating between comments on a PR. This was popular internally
+                at both my previous companies.
+              </Project>
             </div>
+            <Project
+              name="Intel 8085A emulator"
+              date="2022"
+              url="https://github.com/banga/Emulator"
+              technologies={["c++", "asm", ".NET"]}
+            >
+              Built an emulator for Intel 8085A assembly for a class project in
+              undergrad.
+            </Project>
           </div>
         </Page>
       )}

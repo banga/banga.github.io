@@ -2,7 +2,10 @@
   - [x] Add skeleton
   - [ ] Fill out projects
   - [ ] Link from home page and résumé
-- [ ] Convenince to insert relative links reliably and - detect broken links
+- [ ] Link management
+  - [ ] Add relative links reliably
+  - [ ] Detect broken links
+  - [ ] External links with the proper attributes
 - [ ] Add og images for home and blog feed pages
 - [x] Add robots.txt
 - [x] Add resume
