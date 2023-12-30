@@ -214,6 +214,7 @@ a {
 }
 a[href^="http"] {
   text-decoration: underline;
+  text-decoration-color: var(--text-dim-color);
   color: var(--external-link-color);
 }
 
