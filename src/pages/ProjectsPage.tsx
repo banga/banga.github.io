@@ -23,11 +23,35 @@ function ProjectTitle({
   );
 }
 
-function Project({
-  name,
+function ProjectDetails({
   date,
   stars,
+  technologies,
+}: {
+  date: string;
+  stars: number;
+  technologies: string[];
+}) {
+  return (
+    <div className="flex-row gap-half">
+      {technologies.map((name, i) => (
+        <code key={i}>{name}</code>
+      ))}
+      {stars > 1000 && (
+        <div className="font-x-small dim">
+          {"★ " + Math.round(stars / 100) / 10 + "k"}
+        </div>
+      )}
+      <div className="font-x-small dim">{date}</div>
+    </div>
+  );
+}
+
+function Project({
+  name,
   url,
+  date,
+  stars = 0,
   technologies = [],
   children,
 }: {
@@ -40,19 +64,9 @@ function Project({
 }) {
   return (
     <div className="flex-col bb1 pb1 mb1">
-      <div className="flex-row space-between align-center">
+      <div className="flex-row flex-wrap space-between align-center">
         <ProjectTitle name={name} url={url} />
-        <div className="flex-row gap-half">
-          {technologies.map((name, i) => (
-            <code key={i}>{name}</code>
-          ))}
-          {stars && stars > 1000 && (
-            <div className="font-x-small dim">
-              {"★ " + Math.round(stars / 100) / 10 + "k"}
-            </div>
-          )}
-          <div className="font-x-small dim">{date}</div>
-        </div>
+        <ProjectDetails date={date} stars={stars} technologies={technologies} />
       </div>
       <div className="mt1 font-small">{children}</div>
     </div>
