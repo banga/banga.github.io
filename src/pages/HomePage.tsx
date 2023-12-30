@@ -2,11 +2,12 @@ import React from "react";
 import { Page } from "../components/Page.js";
 import { SocialIcons } from "../components/SocialIcons.js";
 import { BuildContext } from "../components/BuildContext.js";
-import { RESUME_PATH } from "../consts.js";
+import { BLOG_PATH, RESUME_PATH } from "../consts.js";
 
 function Home() {
+  const separator = <> · </>;
   return (
-    <div className="m2 flex-col">
+    <div className="flex-col m2">
       <div className="flex-col">
         <img className="m1 circle photo" src="assets/me.jpg" alt="me" />
       </div>
@@ -16,18 +17,17 @@ function Home() {
           <div className="dim">banga.shrey@gmail.com</div>
         </div>
         <div className="m1">
-          I have worked as a Software Engineer at{" "}
+          Full-stack software engineer in the DC area. Previously worked at{" "}
           <a href="https://www.airtable.com">Airtable</a>,{" "}
           <a href="https://www.quip.com">Quip</a>,{" "}
           <a href="https://www.quora.com">Quora</a>,{" "}
           <a href="https://www.google.com">Google</a> and{" "}
-          <a href="https://www.adobe.com">Adobe</a>. A detailed résumé can be
-          found <a href={RESUME_PATH}>here</a>.
+          <a href="https://www.adobe.com">Adobe</a>.
         </div>
         <div className="m1">
-          My other work can be found on my{" "}
-          <a href="https://github.com/banga">GitHub</a>. I also write to my{" "}
-          <a href="/blog">blog</a> on occasion.
+          <a href={RESUME_PATH}>résumé</a>
+          {separator}
+          <a href={BLOG_PATH}>blog</a>
         </div>
         <div className="m1">
           <SocialIcons />

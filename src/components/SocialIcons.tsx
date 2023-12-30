@@ -3,12 +3,16 @@ import { Twitter } from "./icons/twitter.js";
 import { Mastodon } from "./icons/mastodon.js";
 import React from "react";
 import { Atom } from "./icons/atom.js";
+import { GitHub } from "./icons/github.js";
 
 export function SocialIcons() {
   return (
     <div className="flex-row gap-1">
       <a href="/blog/atom.xml" title="Atom feed">
         <Atom />
+      </a>
+      <a href="https://www.github.com/banga" title="GitHub profile">
+        <GitHub />
       </a>
       <a
         href="https://www.linkedin.com/in/shrey-banga"
