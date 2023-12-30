@@ -4,6 +4,7 @@ import { BuildContext } from "../components/BuildContext.js";
 import { PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
 import { Link } from "../components/Link.js";
+import { Footer } from "../components/Footer.js";
 
 function Heading() {
   return (
@@ -290,6 +291,7 @@ export function ResumePage() {
           <div className="flex-col m1">
             <Header pathName={RESUME_PATH} />
             <Resume />
+            <Footer />
           </div>
         </Page>
       )}
