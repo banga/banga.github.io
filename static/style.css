@@ -1,3 +1,8 @@
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Colors */
 :root {
   --background-color: #15181a;
