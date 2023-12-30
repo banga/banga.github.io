@@ -171,8 +171,20 @@
 .gap-1 {
   gap: var(--spacing-size);
 }
+.row-gap-1 {
+  row-gap: var(--spacing-size);
+}
+.col-gap-1 {
+  column-gap: var(--spacing-size);
+}
 .gap-half {
   gap: calc(var(--spacing-size) * 0.5);
+}
+.row-gap-half {
+  row-gap: calc(var(--spacing-size) * 0.5);
+}
+.col-gap-half {
+  column-gap: calc(var(--spacing-size) * 0.5);
 }
 
 /* Borders */

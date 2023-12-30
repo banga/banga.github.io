@@ -19,22 +19,37 @@ function Heading() {
 
 const LEFT_COLUMN_SIZE = "6rem";
 
+function Skills({ skills }: { skills: string[] }) {
+  return (
+    <div className="flex-row flex-wrap col-gap-half">
+      {skills.map((name, i) => (
+        <code key={i}>{name}</code>
+      ))}
+    </div>
+  );
+}
+
 function Employer({
   name,
   title,
+  skills,
   children,
 }: {
   name: string;
   title: string;
+  skills?: string[];
   children?: ReactNode;
 }) {
   return (
     <div className="flex-col gap-1 pt1 pb1 bb1">
-      <div className="flex-row align-center gap-1">
+      <div className="flex-row align-start gap-1">
         <div className="bold flex-0" style={{ flexBasis: LEFT_COLUMN_SIZE }}>
           {name}
         </div>
-        <div className="bold">{title}</div>
+        <div className="flex-col">
+          <div className="bold">{title}</div>
+          {skills && <Skills skills={skills} />}
+        </div>
       </div>
       {children}
     </div>
@@ -67,7 +82,11 @@ function WorkItem({
 function Work() {
   return (
     <div className="flex-col">
-      <Employer name="Airtable" title="Staff Software Engineer">
+      <Employer
+        name="Airtable"
+        title="Staff Software Engineer"
+        skills={["TypeScript", "React", "node", "MySQL", "Kibana", "Mode"]}
+      >
         <WorkItem date="2022 — 2023" subtitle="Product Performance">
           Tech led and project managed a cross-team product performance
           improvement effort. Reduced p75 TTI by 54% and bundle size by 22%.
@@ -119,7 +138,18 @@ function Work() {
           standardize debriefs and periodically refresh interviewer calibration.
         </WorkItem>
       </Employer>
-      <Employer name="Quip" title="Staff Software Engineer">
+      <Employer
+        name="Quip"
+        title="Staff Software Engineer"
+        skills={[
+          "TypeScript",
+          "React",
+          "Python",
+          "Objective-C",
+          "Java",
+          "Mode",
+        ]}
+      >
         <WorkItem date="2019" subtitle="Client Infra">
           Worked with three highly tenured engineers to{" "}
           <Link href="https://quip.com/blog/the-road-to-typescript-at-quip-part-one">
@@ -153,7 +183,11 @@ function Work() {
           debugging, async properties, github code review extension etc.
         </WorkItem>
       </Employer>
-      <Employer name="Quora" title="Software Engineer">
+      <Employer
+        name="Quora"
+        title="Software Engineer"
+        skills={["Python", "JavaScript", "MySQL", "CSS"]}
+      >
         <WorkItem date="2014 — 2016" subtitle="Platform">
           <Link href="https://quorablog.quora.com/A-New-Quora-Editor">
             Rebuilt
@@ -165,7 +199,8 @@ function Work() {
           <br />
           Wrote several highly used internal tools, including an extensible
           linter, a tool for managing how code is pushed, per-developer
-          instances, and a UI testing system.
+          instances, and a UI testing system. Maintained{" "}
+          <Link href="https://github.com/quora/asynq">asynq</Link>.
         </WorkItem>
         <WorkItem date="2013 — 2014">
           Built{" "}
@@ -176,7 +211,11 @@ function Work() {
           group. Built speed measurement tools. Ran growth experiments.
         </WorkItem>
       </Employer>
-      <Employer name="Google" title="Software Engineering Intern">
+      <Employer
+        name="Google"
+        title="Software Engineering Intern"
+        skills={["c++", "Python", "JavaScript", "HTML"]}
+      >
         <WorkItem date="2012" subtitle="Chrome">
           Built a tool for automatic regression alerts in Chrome's performance.
           Fixed a WebKit parser bug, improving benchmark by a few percent.

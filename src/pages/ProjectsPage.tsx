@@ -235,7 +235,7 @@ export function ProjectsPage() {
                 name="shreyb.dev"
                 date="2023"
                 url="https://github.com/banga/banga.github.io"
-                technologies={["React", "node"]}
+                technologies={["React", "node", "CSS"]}
               >
                 This very website. I wrote all about it in{" "}
                 <Link href="/blog/2023/12/23/building-this-blog.html">
