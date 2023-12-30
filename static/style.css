@@ -168,6 +168,9 @@
 .gap-1 {
   gap: var(--spacing-size);
 }
+.gap-half {
+  gap: calc(var(--spacing-size) * 0.5);
+}
 
 /* Borders */
 .b1 {

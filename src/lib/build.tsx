@@ -14,8 +14,15 @@ import { BuildContext, BuildContextType } from "../components/BuildContext.js";
 import { writeBuildHash } from "./auto-reload.js";
 import { writeFile } from "./write-file.js";
 import * as consts from "../consts.js";
-import { STATIC_DIR, BLOG_PATH, OUTPUT_DIR, RESUME_PATH } from "../consts.js";
+import {
+  STATIC_DIR,
+  BLOG_PATH,
+  OUTPUT_DIR,
+  RESUME_PATH,
+  PROJECTS_PATH,
+} from "../consts.js";
 import { ResumePage } from "../pages/ResumePage.js";
+import { ProjectsPage } from "../pages/ProjectsPage.js";
 
 function renderElementToFile({
   element,
@@ -32,6 +39,19 @@ function renderElementToFile({
     </BuildContext.Provider>
   );
   writeFile(outputPath, `<!DOCTYPE html>\n${html}`);
+}
+
+function writePage(
+  buildContext: BuildContextType,
+  pagePath: string,
+  element: ReactElement
+) {
+  const outputPath = path.join(OUTPUT_DIR, pagePath, "index.html");
+  renderElementToFile({
+    element,
+    outputPath,
+    buildContext,
+  });
 }
 
 function writeBlogPosts(buildContext: BuildContextType, posts: BlogPostData[]) {
@@ -74,35 +94,12 @@ async function writeBlogAsync(
   await writeBlogPostOpenGraphImagesAsync(buildContext, posts);
 
   // Write the feed
-  const blogOutputPath = path.join(OUTPUT_DIR, BLOG_PATH, "index.html");
-  renderElementToFile({
-    element: <BlogFeed posts={posts} />,
-    outputPath: blogOutputPath,
-    buildContext,
-  });
+  writePage(buildContext, BLOG_PATH, <BlogFeed posts={posts} />);
 
   // Write the atom feed for the blog
   const atomFeed = renderAtomFeedForBlog({ posts, buildContext });
   const atomOutputPath = path.join(OUTPUT_DIR, BLOG_PATH, "atom.xml");
   writeFile(atomOutputPath, atomFeed);
-}
-
-function writeHomepage(buildContext: BuildContextType) {
-  const outputPath = path.join(OUTPUT_DIR, "index.html");
-  renderElementToFile({
-    element: <HomePage />,
-    outputPath,
-    buildContext,
-  });
-}
-
-function writeResume(buildContext: BuildContextType) {
-  const outputPath = path.join(OUTPUT_DIR, RESUME_PATH, "index.html");
-  renderElementToFile({
-    element: <ResumePage />,
-    outputPath,
-    buildContext,
-  });
 }
 
 function copyStaticFiles() {
@@ -120,9 +117,9 @@ export async function buildAsync(buildContext: BuildContextType) {
 
   await writeBlogAsync(buildContext, posts);
 
-  writeResume(buildContext);
-
-  writeHomepage(buildContext);
+  writePage(buildContext, RESUME_PATH, <ResumePage />);
+  writePage(buildContext, PROJECTS_PATH, <ProjectsPage />);
+  writePage(buildContext, "/", <HomePage />);
 
   writeBuildHash(buildContext);
 }

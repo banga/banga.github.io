@@ -1,5 +1,6 @@
 export const BLOG_PATH = "/blog/";
 export const RESUME_PATH = "/resume/";
+export const PROJECTS_PATH = "/projects/";
 export const ATOM_FILE_NAME = "atom.xml";
 export const OUTPUT_DIR = "./_site/";
 export const HASH_FILE = ".build-hash";
