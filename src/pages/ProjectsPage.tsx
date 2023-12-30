@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Page } from "../components/Page.js";
 import { BuildContext } from "../components/BuildContext.js";
-import { PROJECTS_PATH } from "../consts.js";
+import { PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
 import { Footer } from "../components/Footer.js";
 import { Link } from "../components/Link.js";
@@ -265,6 +265,10 @@ export function ProjectsPage() {
               Built an emulator for Intel 8085A assembly for a class project in
               undergrad.
             </Project>
+            <div className="pb1">
+              My <Link href={RESUME_PATH}>résumé</Link> lists interesting
+              projects I did for work.
+            </div>
             <Footer />
           </div>
         </Page>

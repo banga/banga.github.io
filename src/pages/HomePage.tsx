@@ -2,7 +2,7 @@ import React from "react";
 import { Page } from "../components/Page.js";
 import { SocialIcons } from "../components/SocialIcons.js";
 import { BuildContext } from "../components/BuildContext.js";
-import { BLOG_PATH, RESUME_PATH } from "../consts.js";
+import { BLOG_PATH, PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Link } from "../components/Link.js";
 
 function Home() {
@@ -29,6 +29,8 @@ function Home() {
           <Link href={RESUME_PATH}>résumé</Link>
           {separator}
           <Link href={BLOG_PATH}>blog</Link>
+          {separator}
+          <Link href={PROJECTS_PATH}>projects</Link>
         </div>
         <div className="m1">
           <SocialIcons />

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Page } from "../components/Page.js";
 import { BuildContext } from "../components/BuildContext.js";
-import { RESUME_PATH } from "../consts.js";
+import { PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
 import { Link } from "../components/Link.js";
 
@@ -189,7 +189,7 @@ function Work() {
 
 function Education() {
   return (
-    <div className="flex-col bt1">
+    <div className="flex-col pb1 bb1">
       {/* <div className="font-large">Education</div> */}
       <div className="pt1">
         <div className="bold">University of North Carolina at Chapel Hill</div>
@@ -219,12 +219,21 @@ function Education() {
   );
 }
 
+function Projects() {
+  return (
+    <div className="pb1 pt1">
+      A list of my other projects is <Link href={PROJECTS_PATH}>here</Link>.
+    </div>
+  );
+}
+
 function Resume() {
   return (
     <div className="flex-col">
       {Heading()}
       {Work()}
       {Education()}
+      {Projects()}
     </div>
   );
 }
