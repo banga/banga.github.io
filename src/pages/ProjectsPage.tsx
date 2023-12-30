@@ -77,10 +77,10 @@ function Project({
   );
 }
 
-function Screenshot({ url }: { url: string }) {
+function Screenshot({ src }: { src: string }) {
   return (
-    <Link className="flex-row pt1 pb1" href={url}>
-      <img src={url} />
+    <Link className="flex-row pt1 pb1" href={src}>
+      <img src={src} />
     </Link>
   );
 }
@@ -107,7 +107,7 @@ export function ProjectsPage() {
               >
                 A tool to display git diffs with syntax highlighting in a
                 side-by-side view:
-                <Screenshot url="https://raw.githubusercontent.com/banga/git-split-diffs/main/screenshots/dark.png" />
+                <Screenshot src="/assets/git-split-diffs.webp" />
                 When collaborating with other developers, we spend a lot of time
                 staring at diffs in our terminals. The default formatting of
                 those lags pretty far behind what you can see on GitHub or a
@@ -126,7 +126,7 @@ export function ProjectsPage() {
                 technologies={["Python", "shell"]}
               >
                 A highly customizable shell prompt:
-                <Screenshot url="https://raw.githubusercontent.com/banga/powerline-shell/master/bash-powerline-screenshot.png" />
+                <Screenshot src="/assets/bash-powerline-screenshot.png" />
                 This was inspired by the beautiful{" "}
                 <Link href="https://github.com/powerline/powerline">
                   Powerline
@@ -147,7 +147,7 @@ export function ProjectsPage() {
                 technologies={["Rust"]}
               >
                 A hobby raytracer in rust:
-                <Screenshot url="https://github.com/banga/craytracer/blob/master/images/dragon.png?raw=true" />
+                <Screenshot src="/assets/dragon.webp" />
                 Started it to learn rust, but admittedly got carried away while
                 reading <Link href="https://pbrt.org/">pbrt</Link> and
                 implemented a{" "}
@@ -191,7 +191,7 @@ export function ProjectsPage() {
                 </Link>{" "}
                 extensions provided by Google by allowing you to track multiple
                 accounts at once:
-                <Screenshot url="https://github.com/milkbikis/Gmail-Extension--Multiple-Accounts/raw/master/title_image.png" />
+                <Screenshot src="/assets/gmail-extension.png" />
                 At its peak, it had around 35k users, according to the Chrome
                 web store. It also had the dubious honor of causing a "DDoS on
                 Gmail", to quote the PM on the extensions team.
