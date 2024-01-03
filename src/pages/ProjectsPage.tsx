@@ -186,8 +186,8 @@ function Projects() {
       >
         This very website. I wrote all about it in{" "}
         <Link href="/blog/2023/12/23/building-this-blog.html">this</Link> blog
-        post, but I essentially wrote my own static site generator that deploys
-        builds and deploys this site to GitHub pages on every push.
+        post, but I essentially wrote a static site generator that builds and
+        deploys this site to GitHub pages on every push.
       </Project>
       <Project
         name="Gmail multi-account mail checker"
