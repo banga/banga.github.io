@@ -261,9 +261,19 @@ function Education() {
 
 function Projects() {
   return (
-    <div className="pb1 pt1">
-      A list of my other projects is <Link href={PROJECTS_PATH}>here</Link>.
-    </div>
+    <BuildContext.Consumer>
+      {({ baseUrl }) => (
+        <div className="pb1 pt1">
+          A list of my side projects is at{" "}
+          <Link href={PROJECTS_PATH}>
+            {new URL(PROJECTS_PATH, baseUrl)
+              .toString()
+              .replace(/^https?:\/\//g, "")}
+          </Link>
+          .
+        </div>
+      )}
+    </BuildContext.Consumer>
   );
 }
 

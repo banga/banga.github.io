@@ -8,7 +8,7 @@ export function Header({ pathName }: { pathName: string }) {
   return (
     <BuildContext.Consumer>
       {({ baseUrl }) => (
-        <div>
+        <div className="no-print">
           <Link href="/">{new URL(baseUrl).hostname}</Link>
           <span className="dim"> / </span>
           <Link href={pathName}>{title}</Link>

@@ -308,3 +308,14 @@ h2:hover > .permalink,
 h3:hover > .permalink {
   opacity: 1;
 }
+
+/* Print */
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  body {
+    max-width: 100%;
+  }
+}
