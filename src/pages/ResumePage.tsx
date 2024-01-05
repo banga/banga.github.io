@@ -215,7 +215,7 @@ function Work() {
       <Employer
         name="Google"
         title="Software Engineering Intern"
-        skills={["c++", "Python", "JavaScript", "HTML"]}
+        skills={["C++", "Python", "JavaScript", "HTML"]}
       >
         <WorkItem date="2012" subtitle="Chrome">
           Built a tool for automatic regression alerts in Chrome's performance.
