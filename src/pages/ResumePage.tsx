@@ -218,9 +218,12 @@ function Work() {
         skills={["C++", "Python", "JavaScript", "HTML"]}
       >
         <WorkItem date="2012" subtitle="Chrome">
-          Built a tool for automatic regression alerts in Chrome's performance.
-          Fixed a WebKit parser bug, improving benchmark by a few percent.
-          Analyzed the effects of an alternative DNS alias selection strategy.
+          Built a tool for automatic regression alerts in Chrome's performance.{" "}
+          <Link href="https://github.com/WebKit/WebKit/commit/843368ba00b6d430f0825d2b1b4e41eec0983f8b">
+            Fixed
+          </Link>{" "}
+          a WebKit parser bug, reducing rendering delays. Analyzed the effects
+          of an alternative DNS alias selection strategy.
         </WorkItem>
       </Employer>
     </div>
