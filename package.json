@@ -8,8 +8,7 @@
     "compile": "tsc --build",
     "build": "TZ=UTC node build/index.js",
     "clean": "rm -rvf _site",
-    "build:watch": "SHOULD_AUTO_RELOAD=1 BASE_URL=http://localhost:8080/ ./node_modules/nodemon/bin/nodemon.js",
-    "draft:watch": "npm run clean && POSTS_DIR=./drafts npm run build:watch",
+    "build:dev": "SHOULD_AUTO_RELOAD=1 INCLUDE_DRAFTS=1 BASE_URL=http://localhost:8080/ ./node_modules/nodemon/bin/nodemon.js",
     "serve": "npx http-server ./_site -c-1 -d false"
   },
   "nodemonConfig": {

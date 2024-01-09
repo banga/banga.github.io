@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { BuildContextType } from "../components/BuildContext.js";
+import { BLOG_POSTS_DIR, BLOG_POST_DRAFTS_DIR } from "../consts.js";
 
 export type BlogPostData = {
   title: string;
@@ -86,11 +87,20 @@ function readBlogPost(filePath: string): BlogPostData {
   };
 }
 
-export function readBlogPosts(buildContext: BuildContextType): BlogPostData[] {
-  const postPaths = fs.readdirSync(buildContext.postsDir);
-  const posts = postPaths.map((postPath) =>
-    readBlogPost(path.join(buildContext.postsDir, postPath))
+function readBlogPostsFromDir(postsDir: string): BlogPostData[] {
+  const postPaths = fs.readdirSync(postsDir);
+  return postPaths.map((postPath) =>
+    readBlogPost(path.join(postsDir, postPath))
   );
+}
+
+export function readBlogPosts(buildContext: BuildContextType): BlogPostData[] {
+  const posts = [
+    ...readBlogPostsFromDir(BLOG_POSTS_DIR),
+    ...(buildContext.includeDrafts
+      ? readBlogPostsFromDir(BLOG_POST_DRAFTS_DIR)
+      : []),
+  ];
   // Newest first. This matters when rendering the feed.
   posts.sort((a, b) => (a.createdDate < b.createdDate ? 1 : -1));
   return posts;

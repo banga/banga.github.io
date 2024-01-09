@@ -1,4 +1,6 @@
 export const BLOG_PATH = "/blog/";
+export const BLOG_POSTS_DIR = "./posts";
+export const BLOG_POST_DRAFTS_DIR = "./drafts";
 export const RESUME_PATH = "/resume/";
 export const PROJECTS_PATH = "/projects/";
 export const ATOM_FILE_NAME = "atom.xml";
