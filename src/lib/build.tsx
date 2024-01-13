@@ -24,6 +24,7 @@ import {
 import { ResumePage } from "../pages/ResumePage.js";
 import { ProjectsPage } from "../pages/ProjectsPage.js";
 import { verifyLinkedRelativePathsExist } from "../components/Link.js";
+import { ErrorPage } from "../pages/ErrorPage.js";
 
 function renderElementToFile({
   element,
@@ -44,10 +45,14 @@ function renderElementToFile({
 
 function writePage(
   buildContext: BuildContextType,
+  // If the path is a directory, the page is written index.html in the directory
   pagePath: string,
   element: ReactElement
 ) {
-  const outputPath = path.join(OUTPUT_DIR, pagePath, "index.html");
+  let outputPath = path.join(OUTPUT_DIR, pagePath);
+  if (outputPath.endsWith("/")) {
+    outputPath = path.join(outputPath, "index.html");
+  }
   renderElementToFile({
     element,
     outputPath,
@@ -120,6 +125,7 @@ export async function buildAsync(buildContext: BuildContextType) {
 
   writePage(buildContext, RESUME_PATH, <ResumePage />);
   writePage(buildContext, PROJECTS_PATH, <ProjectsPage />);
+  writePage(buildContext, "404.html", <ErrorPage />);
   writePage(buildContext, "/", <HomePage />);
 
   writeBuildHash(buildContext);
