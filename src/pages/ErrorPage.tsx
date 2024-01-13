@@ -7,7 +7,7 @@ import { AutoReloadScript } from "../lib/auto-reload.js";
 export function ErrorPage() {
   return (
     <BuildContext.Consumer>
-      {({ baseUrl, cssCacheBuster, shouldAutoReload }) => (
+      {({ cssCacheBuster, shouldAutoReload }) => (
         <html lang="en" style={{ height: "100%" }}>
           <head>
             <meta charSet="utf-8" />
@@ -28,7 +28,7 @@ export function ErrorPage() {
               <div className="font-large">404</div>
               <div>This page does not seem to exist.</div>
               <div>
-                Click <Link href={baseUrl}>here</Link> to visit the home page.
+                Click <Link href="/">here</Link> to visit the home page.
               </div>
             </div>
           </body>
