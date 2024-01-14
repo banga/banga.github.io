@@ -5,6 +5,7 @@ import { PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
 import { Link } from "../components/Link.js";
 import { Footer } from "../components/Footer.js";
+import { Img } from "../components/Img.js";
 
 function Heading() {
   return (
@@ -13,7 +14,7 @@ function Heading() {
         <div className="bold">Shrey Banga</div>
         <div className="font-medium dim">banga.shrey@gmail.com</div>
       </div>
-      <img className="circle photo-small" src="../assets/me.jpg" alt="me" />
+      <Img className="m1 circle photo-small" src="/assets/me.jpg" alt="me" />
     </div>
   );
 }

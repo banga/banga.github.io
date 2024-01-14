@@ -4,13 +4,14 @@ import { SocialIcons } from "../components/SocialIcons.js";
 import { BuildContext } from "../components/BuildContext.js";
 import { BLOG_PATH, PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Link } from "../components/Link.js";
+import { Img } from "../components/Img.js";
 
 function Home() {
   const separator = <> · </>;
   return (
     <div className="flex-col m2">
       <div className="flex-col">
-        <img className="m1 circle photo" src="assets/me.jpg" alt="me" />
+        <Img className="m1 circle photo" src="/assets/me.jpg" alt="me" />
       </div>
       <div className="flex-col">
         <div className="m1">

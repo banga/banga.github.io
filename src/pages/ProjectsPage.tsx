@@ -5,6 +5,7 @@ import { PROJECTS_PATH, RESUME_PATH } from "../consts.js";
 import { Header } from "../components/Header.js";
 import { Footer } from "../components/Footer.js";
 import { Link } from "../components/Link.js";
+import { Img } from "../components/Img.js";
 
 function ProjectTitle({
   name,
@@ -80,7 +81,7 @@ function Project({
 function Screenshot({ src }: { src: string }) {
   return (
     <Link className="flex-row pt1 pb1" href={src}>
-      <img src={src} />
+      <Img src={src} />
     </Link>
   );
 }

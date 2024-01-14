@@ -6,6 +6,7 @@ import remarkMath from "remark-math";
 import { AutolinkedHeading } from "./AutolinkedHeading.js";
 import { SyntaxHighlightedCode } from "./SyntaxHighlightedCode.js";
 import { Link } from "../Link.js";
+import { Img } from "../Img.js";
 
 export function BlogPostContent({
   content,
@@ -40,6 +41,7 @@ export function BlogPostContent({
       components={{
         code: SyntaxHighlightedCode,
         a: Link,
+        img: Img,
         ...(autolinkHeadings
           ? { h2: AutolinkedHeading, h3: AutolinkedHeading }
           : {}),
