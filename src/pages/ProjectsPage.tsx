@@ -135,15 +135,19 @@ function Projects() {
         date="2023"
         technologies={["Rust"]}
       >
-        A hobby raytracer in rust:
-        <Screenshot src="/assets/dragon.webp" />
+        A physically based raytracer in rust. Some sample images:
+        <div className="flex-row">
+          <Screenshot src="/assets/staircase.png" />
+          <Screenshot src="/assets/helmet.png" />
+        </div>
         Started it to learn rust, but admittedly got carried away while reading{" "}
         <Link href="https://pbrt.org/">pbrt</Link> and implemented a{" "}
         <Link href="https://pbr-book.org/4ed/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies">
           BVH
         </Link>
-        , a parser for my own scene file format, support for triangle meshes,
-        and a multi-threaded tile-based renderer.
+        , a parser for my own scene file format, a multi-threaded renderer and
+        support for triangle meshes, focal blur, textures, multiple importance
+        sampling and several materials.
       </Project>
       <Project
         name="prefactor"
