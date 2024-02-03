@@ -43,6 +43,7 @@ I picked up the [Programming Rust, 2nd Edition](https://www.oreilly.com/library/
 Around this time, I left my job and took a complete break from programming. Then around the end of 2023, after I did [Advent of Code](https://adventofcode.com/) in Rust, I got a second wind and started reading the book again. As I learned things I could use in the raytracer, I would go back and [apply](https://github.com/banga/craytracer/commit/9ff0d0498ad5524cd5ae4c2e16d4dcb47980a9a8) [them](https://github.com/banga/craytracer/commit/e31a0249d15c1c614d61d7b11ed83350b7accf0f) [to](https://github.com/banga/craytracer/commit/6b92724ebc8740685312d92c3d67bebda5ccabc7) it. I eventually once again got distracted by the graphics and added several sophisticated features to get to the point of rendering images like this:
 
 ![A raytraced image of a staircase with textures, area lighting](/assets/staircase.png)
+_[The Wooden Staircase](https://blendswap.com/blend/14449) by [Wig42](https://blendswap.com/profile/130393)_
 
 Anyway, I did finish the book once the raytracing side quest was done (for now). While there are a few chapters that will need a revisit when I actually need to use them (Async, FFI, unsafe rust), I ended it feeling a lot more comfortable with the language.
 

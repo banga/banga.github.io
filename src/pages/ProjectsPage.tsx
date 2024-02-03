@@ -78,11 +78,20 @@ function Project({
   );
 }
 
-function Screenshot({ src }: { src: string }) {
+function Screenshot({
+  src,
+  caption: caption,
+}: {
+  src: string;
+  caption?: ReactNode;
+}) {
   return (
-    <Link className="flex-row pt1 pb1" href={src}>
-      <Img src={src} />
-    </Link>
+    <div className="flex-col pt1 pb1 align-center">
+      <Link href={src}>
+        <Img src={src} />
+      </Link>
+      {caption && <em>{caption}</em>}
+    </div>
   );
 }
 
@@ -137,8 +146,32 @@ function Projects() {
       >
         A physically based raytracer in rust. Some sample images:
         <div className="flex-row">
-          <Screenshot src="/assets/staircase.png" />
-          <Screenshot src="/assets/helmet.png" />
+          <Screenshot
+            src="/assets/staircase.png"
+            caption={
+              <>
+                <Link href="https://blendswap.com/blend/14449">
+                  The Wooden Staircase
+                </Link>{" "}
+                by{" "}
+                <Link href="https://blendswap.com/profile/130393">Wig42</Link>
+              </>
+            }
+          />
+          <Screenshot
+            src="/assets/helmet.png"
+            caption={
+              <>
+                <Link href="https://www.blendswap.com/blend/13953">
+                  Stormtrooper
+                </Link>{" "}
+                by{" "}
+                <Link href="https://www.blendswap.com/profile/120125">
+                  Scott Graham
+                </Link>
+              </>
+            }
+          />
         </div>
         Started it to learn rust, but admittedly got carried away while reading{" "}
         <Link href="https://pbrt.org/">pbrt</Link> and implemented a{" "}

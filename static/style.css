@@ -281,6 +281,16 @@ pre > pre {
 img {
   max-width: 100%;
   height: auto;
+
+  /* Center images in posts */
+  display: block;
+  margin: 0 auto;
+}
+
+/* Hack to support image captions */
+img + em {
+  display: block;
+  text-align: center;
 }
 
 .photo {

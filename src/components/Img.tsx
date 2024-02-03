@@ -5,9 +5,11 @@ import React from "react";
 
 export function Img({
   src,
+  node,
   ...rest
 }: {
   src?: string | undefined;
+  node?: import("hast").Element | undefined;
   className?: string | undefined;
   alt?: string | undefined;
   width?: string | number | undefined;
