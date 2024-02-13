@@ -105,8 +105,8 @@ function Projects() {
         url="https://github.com/banga/git-split-diffs"
         technologies={["TypeScript", "node"]}
       >
-        A tool to display git diffs with syntax highlighting in a side-by-side
-        view:
+        A CLI tool to display git diffs with syntax highlighting in a
+        side-by-side view:
         <Screenshot src="/assets/git-split-diffs.webp" />
         When collaborating with other developers, we spend a lot of time staring
         at diffs in our terminals. The default formatting of those lags pretty
