@@ -87,7 +87,7 @@ function Work() {
       <Employer
         name="Airtable"
         title="Staff Software Engineer"
-        skills={["TypeScript", "React", "node", "MySQL", "Kibana", "Mode"]}
+        skills={["TypeScript", "React", "node", "MySQL", "ELK", "Redshift"]}
       >
         <WorkItem date="2022 — 2023" subtitle="Product Performance">
           Tech led and project managed a cross-team product performance
