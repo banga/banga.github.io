@@ -34,19 +34,25 @@ function Skills({ skills }: { skills: string[] }) {
 function Employer({
   name,
   title,
+  date,
   skills,
   children,
 }: {
   name: string;
   title: string;
+  date: string;
   skills?: string[];
   children?: ReactNode;
 }) {
   return (
     <div className="flex-col gap-1 pt1 pb1 bb1">
       <div className="flex-row align-start gap-1">
-        <div className="bold flex-0" style={{ flexBasis: LEFT_COLUMN_SIZE }}>
-          {name}
+        <div
+          className="flex-col flex-0"
+          style={{ flexBasis: LEFT_COLUMN_SIZE }}
+        >
+          <div className="bold">{name}</div>
+          <div className="font-x-small dim">{date}</div>
         </div>
         <div className="flex-col">
           <div className="bold">{title}</div>
@@ -59,11 +65,9 @@ function Employer({
 }
 
 function WorkItem({
-  date,
   subtitle,
   children,
 }: {
-  date: string;
   subtitle?: string;
   children: ReactNode;
 }): React.JSX.Element {
@@ -74,7 +78,6 @@ function WorkItem({
         style={{ flexBasis: LEFT_COLUMN_SIZE }}
       >
         {subtitle && <div>{subtitle}</div>}
-        <div className="dim">{date}</div>
       </div>
       <div className="font-small">{children}</div>
     </div>
@@ -87,9 +90,10 @@ function Work() {
       <Employer
         name="Airtable"
         title="Staff Software Engineer"
+        date="2020-2023"
         skills={["TypeScript", "React", "node", "MySQL", "ELK", "Redshift"]}
       >
-        <WorkItem date="2022 — 2023" subtitle="Product Performance">
+        <WorkItem subtitle="Performance & Architecture">
           Tech led and project managed a cross-team product performance
           improvement effort. Reduced p75 TTI by 54% and bundle size by 22%.
           Drastically improved load times for customers with a lot of bases or
@@ -99,8 +103,8 @@ function Work() {
           Implemented HTML streaming and parallelized backend data fetching with
           frontend rendering, which improved load times for smaller bases. Built
           tooling to collect performance profiles directly from browsers.
-        </WorkItem>
-        <WorkItem date="2021 — 2022" subtitle="Performance & Architecture">
+          <br />
+          <br />
           Helped launch <i>view projection</i>, which dramatically improved load
           times of our largest bases, including solving the{" "}
           <Link href="https://medium.com/airtable-eng/the-curious-case-of-the-missing-cell-8ff47d745de7">
@@ -110,7 +114,7 @@ function Work() {
           optimize them for view projection. Implemented several other
           optimizations to improve base health and performance.
         </WorkItem>
-        <WorkItem date="2020 — 2021" subtitle="Platform">
+        <WorkItem subtitle="Product">
           Helped launch{" "}
           <Link href="https://www.airtable.com/platform/automations">
             Automations
@@ -128,14 +132,14 @@ function Work() {
           </Link>
           . Worked on the editor, autocomplete and several API endpoints.
         </WorkItem>
-        <WorkItem date="2020 — 2023" subtitle="Tools">
+        <WorkItem subtitle="Productivity">
           Built several popular internal tools and abstractions: a tool to
           explore models backing parts of the UI, running local JS in non-local
           environments, a repl with autocompletion for the backend, autocomplete
           for CSS classNames, type-aware codemod, a triaging tool for crashers
           etc.
         </WorkItem>
-        <WorkItem date="2023" subtitle="Recruiting">
+        <WorkItem subtitle="Recruiting">
           Surveyed interviewers to identify top pain points. Led efforts to
           standardize debriefs and periodically refresh interviewer calibration.
         </WorkItem>
@@ -143,6 +147,7 @@ function Work() {
       <Employer
         name="Quip"
         title="Staff Software Engineer"
+        date="2016-2020"
         skills={[
           "TypeScript",
           "React",
@@ -152,14 +157,7 @@ function Work() {
           "Mode",
         ]}
       >
-        <WorkItem date="2019" subtitle="Client Infra">
-          Worked with three highly tenured engineers to{" "}
-          <Link href="https://quip.com/blog/the-road-to-typescript-at-quip-part-one">
-            migrate
-          </Link>{" "}
-          the codebase to TypeScript.
-        </WorkItem>
-        <WorkItem date="2018 — 2019" subtitle="Documents">
+        <WorkItem subtitle="Product">
           Tech led the Documents team. Designed a new cross-platform caret &
           selection API to improve the editor's reliability and extensibility.
           We shipped Document History, Font Colors,{" "}
@@ -168,18 +166,23 @@ function Work() {
           </Link>
           , Find-and-Replace, Custom List Numbering, Drag-n-drop list items,
           paste from markdown etc.
-        </WorkItem>
-        <WorkItem date="2018" subtitle="Performance">
-          Built a client-side caching layer using <code>IndexedDB</code> to make
-          the web app behave like native apps and load instantly.
-        </WorkItem>
-        <WorkItem date="2016 - 2017" subtitle="Product">
+          <br />
+          <br />
           Built multi-column layouts, document outline, quotes and horizontal
           rules, page break previews, print headers and footers. Built a new
           sharing model and migrated a major customer to Quip. Shipped some
           growth experiments.
         </WorkItem>
-        <WorkItem date="2016 - 2019" subtitle="Productivity">
+        <WorkItem subtitle="Client Infra">
+          Built a client-side caching layer using <code>IndexedDB</code> to make
+          the web app behave like native apps and load instantly. Worked with
+          three highly tenured engineers to{" "}
+          <Link href="https://quip.com/blog/the-road-to-typescript-at-quip-part-one">
+            migrate
+          </Link>{" "}
+          the codebase to TypeScript.
+        </WorkItem>
+        <WorkItem subtitle="Productivity">
           Built several tools and abstractions to improve productivity: a fast
           pre-commit check runner, test status dashboard, overlays for
           debugging, async properties, github code review extension etc.
@@ -188,37 +191,37 @@ function Work() {
       <Employer
         name="Quora"
         title="Software Engineer"
+        date="2013-2016"
         skills={["Python", "JavaScript", "MySQL", "CSS"]}
       >
-        <WorkItem date="2014 — 2016" subtitle="Platform">
+        <WorkItem subtitle="Product">
           <Link href="https://quorablog.quora.com/A-New-Quora-Editor">
             Rebuilt
           </Link>{" "}
           the rich text editor from the ground up, which obsoleted numerous bugs
           and allowed us to support several new features, such as inline math
-          previews.
-          <br />
-          <br />
-          Wrote several highly used internal tools, including an extensible
-          linter, a tool for managing how code is pushed, per-developer
-          instances, and a UI testing system. Maintained{" "}
-          <Link href="https://github.com/quora/asynq">asynq</Link>.
-        </WorkItem>
-        <WorkItem date="2013 — 2014">
-          Built{" "}
+          previews. Built{" "}
           <Link href="https://quorablog.quora.com/A-New-Way-to-Browse-Your-Own-Content">
             Your Content
           </Link>
-          . Re-designed the feature gating abstraction. Led the code quality
-          group. Built speed measurement tools. Ran growth experiments.
+          . Ran growth experiments.
+        </WorkItem>
+        <WorkItem subtitle="Productivity">
+          Wrote several highly used internal tools, including an extensible
+          linter, a tool for managing how code is pushed, per-developer
+          instances, and a UI testing system. Maintained{" "}
+          <Link href="https://github.com/quora/asynq">asynq</Link>. Re-designed
+          the feature gating abstraction. Led the code quality group. Built
+          speed measurement tools.
         </WorkItem>
       </Employer>
       <Employer
         name="Google"
         title="Software Engineering Intern"
+        date="2012"
         skills={["C++", "Python", "JavaScript", "HTML"]}
       >
-        <WorkItem date="2012" subtitle="Chrome">
+        <WorkItem subtitle="Chrome">
           Built a tool for automatic regression alerts in Chrome's performance.{" "}
           <Link href="https://github.com/WebKit/WebKit/commit/843368ba00b6d430f0825d2b1b4e41eec0983f8b">
             Fixed
