@@ -19,7 +19,8 @@ function Home() {
           <div className="dim">banga.shrey@gmail.com</div>
         </div>
         <div className="m1">
-          Full-stack software engineer in the DC area. Previously worked at{" "}
+          Engineer at <Link href="https://www.anthropic.com">Anthropic</Link>.
+          Previously worked at{" "}
           <Link href="https://www.airtable.com">Airtable</Link>,{" "}
           <Link href="https://www.quip.com">Quip</Link>,{" "}
           <Link href="https://www.quora.com">Quora</Link>,{" "}
