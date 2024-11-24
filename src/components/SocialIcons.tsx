@@ -1,10 +1,10 @@
 import { LinkedIn } from "./icons/linkedin.js";
-import { Twitter } from "./icons/twitter.js";
 import { Mastodon } from "./icons/mastodon.js";
 import React from "react";
 import { Atom } from "./icons/atom.js";
 import { GitHub } from "./icons/github.js";
 import { Link } from "./Link.js";
+import { Bluesky } from "./icons/bluesky.js";
 
 export function SocialIcons() {
   return (
@@ -21,8 +21,8 @@ export function SocialIcons() {
       >
         <LinkedIn />
       </Link>
-      <Link href="https://twitter.com/banga_shrey" title="Twitter profile">
-        <Twitter />
+      <Link href="https://bsky.app/profile/shreyb.dev" title="Bluesky profile">
+        <Bluesky />
       </Link>
       <Link
         rel="me"
