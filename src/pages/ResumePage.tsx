@@ -88,11 +88,6 @@ function Work() {
   return (
     <div className="flex-col">
       <Employer
-        name="Anthropic"
-        title="Member of Technical Staff"
-        date="2024"
-      ></Employer>
-      <Employer
         name="Airtable"
         title="Staff Software Engineer"
         date="2020-2023"
