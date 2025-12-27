@@ -19,8 +19,7 @@ function Home() {
           <div className="dim">banga.shrey@gmail.com</div>
         </div>
         <div className="m1">
-          Engineer.
-          Previously worked at{" "}
+          Engineer. Previously worked at{" "}
           <Link href="https://www.airtable.com">Airtable</Link>,{" "}
           <Link href="https://www.quip.com">Quip</Link>,{" "}
           <Link href="https://www.quora.com">Quora</Link>,{" "}
