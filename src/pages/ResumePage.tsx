@@ -12,7 +12,6 @@ function Heading() {
     <div className="flex-row space-between align-center pt1 pb1 bb1">
       <div className="flex-col font-large">
         <div className="bold">Shrey Banga</div>
-        <div className="font-medium dim">banga.shrey@gmail.com</div>
       </div>
       <Img className="m1 circle photo-small" src="/assets/me.jpg" alt="me" />
     </div>

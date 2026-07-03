@@ -16,7 +16,6 @@ function Home() {
       <div className="flex-col">
         <div className="m1">
           <div className="font-large bold">Shrey Banga</div>
-          <div className="dim">banga.shrey@gmail.com</div>
         </div>
         <div className="m1">
           Engineer. Previously worked at{" "}
